@@ -9,85 +9,78 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <header class="header">
-        <nav class="navbar">
-            <div class="nav-brand">
-                <h1><i class="fas fa-code"></i> DevOps Mastery</h1>
-                <p>by Rishi Gupta</p>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="#content">Content</a></li>
-                <li><a href="https://bunnyrishi.github.io" target="_blank">Portfolio</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div class="blog-post">
+        <a href="../index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i> Back to Blog
+        </a>
+        
+        <article>
+            <header class="blog-post-header">
+                <h1 class="blog-post-title">Kubernetes Basics: Complete Guide</h1>
+                <div class="blog-post-meta">
+                    <span><i class="fas fa-calendar"></i> January 8, 2025</span>
+                    <span><i class="fas fa-clock"></i> 15 min read</span>
+                    <span><i class="fas fa-tag"></i> Beginner</span>
+                </div>
+            </header>
 
-    <main class="blog-post">
-        <div class="container">
-            <article id="content">
-                <header class="post-header">
-                    <h1>Kubernetes Basics: Complete Guide</h1>
-                    <div class="post-meta">
-                        <span><i class="fas fa-calendar"></i> January 2025</span>
-                        <span><i class="fas fa-clock"></i> 30 min read</span>
-                        <span><i class="fas fa-tag"></i> Orchestration</span>
+            <div class="blog-post-content">
+                    <div class="highlight-box">
+                        <h2>⚙️ What is Kubernetes?</h2>
+                        <p>Kubernetes (K8s) is an <strong>open-source container orchestration platform</strong> that automates the deployment, scaling, and management of containerized applications across clusters of hosts.</p>
                     </div>
-                </header>
+                    
+                    <blockquote>
+                        "Kubernetes is a portable, extensible, open-source platform for managing containerized workloads and services." - Kubernetes Documentation
+                    </blockquote>
 
-                <div class="post-content">
-                    <h2>What is Kubernetes?</h2>
-                    <p>Kubernetes (K8s) is an open-source container orchestration platform that automates the deployment, scaling, and management of containerized applications.</p>
-
-                    <h3>Core Concepts</h3>
-                    <ul>
-                        <li><strong>Pods:</strong> Smallest deployable units</li>
-                        <li><strong>Services:</strong> Network abstraction for pods</li>
-                        <li><strong>Deployments:</strong> Manage pod replicas</li>
-                        <li><strong>ConfigMaps:</strong> Configuration management</li>
-                        <li><strong>Secrets:</strong> Sensitive data management</li>
-                    </ul>
-
-                    <h3>Kubernetes Architecture</h3>
-                    <div class="code-block">
-                        <h4>Control Plane Components:</h4>
+                    <h2>🏗️ Core Concepts</h2>
+                    <div class="info-box">
+                        <h3>Essential Components</h3>
                         <ul>
-                            <li><strong>API Server:</strong> Central management entity</li>
-                            <li><strong>etcd:</strong> Distributed key-value store</li>
-                            <li><strong>Scheduler:</strong> Assigns pods to nodes</li>
-                            <li><strong>Controller Manager:</strong> Manages controllers</li>
+                            <li><strong>Pods:</strong> Smallest deployable units containing one or more containers</li>
+                            <li><strong>Services:</strong> Network abstraction layer for accessing pods</li>
+                            <li><strong>Deployments:</strong> Manage pod replicas and rolling updates</li>
+                            <li><strong>ConfigMaps:</strong> Configuration data management</li>
+                            <li><strong>Secrets:</strong> Sensitive information storage</li>
                         </ul>
                     </div>
 
-                    <h3>Essential kubectl Commands</h3>
-                    <div class="code-block">
-                        <h4>Basic Operations:</h4>
-                        <pre><code># Get cluster info
+                    <h2>🏛️ Kubernetes Architecture</h2>
+                    <h3>Control Plane Components</h3>
+                    <ul>
+                        <li><strong>API Server:</strong> Central management entity and communication hub</li>
+                        <li><strong>etcd:</strong> Distributed key-value store for cluster data</li>
+                        <li><strong>Scheduler:</strong> Assigns pods to appropriate nodes</li>
+                        <li><strong>Controller Manager:</strong> Manages various controllers</li>
+                    </ul>
+
+                    <h2>💻 Essential kubectl Commands</h2>
+                    <h3>Basic Operations</h3>
+                    <pre><code># Get cluster information
 kubectl cluster-info
 
-# List nodes
+# List all nodes in cluster
 kubectl get nodes
 
-# List pods
+# List pods in current namespace
 kubectl get pods
 
-# List services
+# List all services
 kubectl get services
 
-# Describe a pod
+# Describe detailed pod information
 kubectl describe pod <pod-name>
 
-# Get pod logs
+# View pod logs
 kubectl logs <pod-name>
 
-# Execute command in pod
+# Execute commands inside pod
 kubectl exec -it <pod-name> -- /bin/bash</code></pre>
-                    </div>
 
-                    <h3>Creating Your First Pod</h3>
-                    <div class="code-block">
-                        <h4>Simple Pod YAML:</h4>
-                        <pre><code>apiVersion: v1
+                    <h2>🚀 Creating Your First Pod</h2>
+                    <h3>Simple Pod YAML</h3>
+                    <pre><code>apiVersion: v1
 kind: Pod
 metadata:
   name: nginx-pod
@@ -99,13 +92,11 @@ spec:
     image: nginx:latest
     ports:
     - containerPort: 80</code></pre>
-                    </div>
 
-                    <h3>Deployments</h3>
-                    <p>Deployments provide declarative updates for pods and replica sets:</p>
-                    <div class="code-block">
-                        <h4>Deployment YAML:</h4>
-                        <pre><code>apiVersion: apps/v1
+                    <h2>📦 Deployments</h2>
+                    <p>Deployments provide <strong>declarative updates</strong> for pods and replica sets, ensuring desired state management:</p>
+                    <h3>Deployment YAML</h3>
+                    <pre><code>apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-deployment
@@ -124,13 +115,11 @@ spec:
         image: nginx:latest
         ports:
         - containerPort: 80</code></pre>
-                    </div>
 
-                    <h3>Services</h3>
-                    <p>Services expose pods to network traffic:</p>
-                    <div class="code-block">
-                        <h4>Service YAML:</h4>
-                        <pre><code>apiVersion: v1
+                    <h2>🌐 Services</h2>
+                    <p>Services <strong>expose pods to network traffic</strong> and provide stable networking endpoints:</p>
+                    <h3>Service YAML</h3>
+                    <pre><code>apiVersion: v1
 kind: Service
 metadata:
   name: nginx-service
@@ -142,34 +131,36 @@ spec:
     port: 80
     targetPort: 80
   type: LoadBalancer</code></pre>
-                    </div>
 
-                    <h3>Common kubectl Operations</h3>
-                    <div class="code-block">
-                        <h4>Deployment Management:</h4>
-                        <pre><code># Apply configuration
+                    <h2>⚙️ Common kubectl Operations</h2>
+                    <h3>Deployment Management</h3>
+                    <pre><code># Apply configuration from file
 kubectl apply -f deployment.yaml
 
-# Scale deployment
+# Scale deployment replicas
 kubectl scale deployment nginx-deployment --replicas=5
 
-# Update image
+# Update container image
 kubectl set image deployment/nginx-deployment nginx=nginx:1.21
 
-# Rollback deployment
+# Rollback to previous version
 kubectl rollout undo deployment/nginx-deployment
 
-# Check rollout status
+# Check deployment rollout status
 kubectl rollout status deployment/nginx-deployment</code></pre>
-                    </div>
 
-                    <h3>ConfigMaps and Secrets</h3>
-                    <div class="code-block">
-                        <h4>ConfigMap Example:</h4>
-                        <pre><code># Create ConfigMap
+                    <h2>🔧 ConfigMaps and Secrets</h2>
+                    <div class="info-box">
+                        <h3>Configuration Management</h3>
+                        <p><strong>ConfigMaps:</strong> Store non-sensitive configuration data</p>
+                        <p><strong>Secrets:</strong> Store sensitive information like passwords and API keys</p>
+                    </div>
+                    
+                    <h3>ConfigMap Example</h3>
+                    <pre><code># Create ConfigMap from command line
 kubectl create configmap app-config --from-literal=database_url=mongodb://localhost:27017
 
-# Use in Pod
+# Use ConfigMap in Pod
 apiVersion: v1
 kind: Pod
 metadata:
@@ -184,26 +175,27 @@ spec:
         configMapKeyRef:
           name: app-config
           key: database_url</code></pre>
+
+                    <div class="highlight-box">
+                        <h2>💡 Best Practices</h2>
+                        <ul>
+                            <li><strong>Namespaces:</strong> Use namespaces for resource organization and isolation</li>
+                            <li><strong>Resource Management:</strong> Set resource limits and requests for containers</li>
+                            <li><strong>Health Checks:</strong> Implement liveness and readiness probes</li>
+                            <li><strong>Monitoring:</strong> Set up proper logging and monitoring solutions</li>
+                            <li><strong>Security:</strong> Use secrets for sensitive data and follow least privilege</li>
+                            <li><strong>Labels:</strong> Use consistent labeling for resource management</li>
+                        </ul>
                     </div>
-
-                    <h3>Best Practices</h3>
-                    <ul>
-                        <li>Use namespaces for organization</li>
-                        <li>Set resource limits and requests</li>
-                        <li>Use health checks (liveness/readiness probes)</li>
-                        <li>Implement proper logging and monitoring</li>
-                        <li>Use secrets for sensitive data</li>
-                        <li>Follow the principle of least privilege</li>
-                    </ul>
-                </div>
-            </article>
-        </div>
-    </main>
-
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 DevOps Mastery Blog by Rishi Gupta. All rights reserved.</p>
-        </div>
-    </footer>
+                    
+                    <h2>🎯 Conclusion</h2>
+                    <p>Kubernetes provides <strong>powerful container orchestration</strong> capabilities for modern applications. Start with basic concepts like pods and services, then gradually explore advanced features like deployments, ConfigMaps, and networking.</p>
+                    
+                    <div class="info-box">
+                        <p><strong>Next Steps:</strong> Practice with minikube or kind locally, then explore production-ready clusters with managed services like EKS, GKE, or AKS.</p>
+                    </div>
+            </div>
+        </article>
+    </div>
 </body>
 </html>
