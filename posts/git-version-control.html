@@ -9,40 +9,34 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <header class="header">
-        <nav class="navbar">
-            <div class="nav-brand">
-                <h1><i class="fas fa-code"></i> DevOps Mastery</h1>
-                <p>by Rishi Gupta</p>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="#content">Content</a></li>
-                <li><a href="https://bunnyrishi.github.io" target="_blank">Portfolio</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div class="blog-post">
+        <a href="../index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i> Back to Blog
+        </a>
+        
+        <article>
+            <header class="blog-post-header">
+                <h1 class="blog-post-title">Git & Version Control Systems: Complete Guide</h1>
+                <div class="blog-post-meta">
+                    <span><i class="fas fa-calendar"></i> January 14, 2025</span>
+                    <span><i class="fas fa-clock"></i> 14 min read</span>
+                    <span><i class="fas fa-tag"></i> Beginner</span>
+                </div>
+            </header>
+            
+            <div class="blog-post-content">
+                <div class="highlight-box">
+                    <h2>🌳 What is Version Control?</h2>
+                    <p>Version control is a <strong>system that records changes to files over time</strong> so you can recall specific versions later. Git is the most popular distributed version control system used in modern software development.</p>
+                </div>
+                
+                <blockquote>
+                    "Git is not just a version control system, it's the foundation of collaborative software development." - Linus Torvalds
+                </blockquote>
 
-    <main class="blog-post">
-        <div class="container">
-            <article id="content">
-                <header class="post-header">
-                    <h1>Git & Version Control Systems: Complete Guide</h1>
-                    <div class="post-meta">
-                        <span><i class="fas fa-calendar"></i> January 2025</span>
-                        <span><i class="fas fa-clock"></i> 20 min read</span>
-                        <span><i class="fas fa-tag"></i> Version Control</span>
-                    </div>
-                </header>
-
-                <div class="post-content">
-                    <h2>What is Version Control?</h2>
-                    <p>Version control is a system that records changes to files over time so you can recall specific versions later. Git is the most popular distributed version control system used in modern software development.</p>
-
-                    <h3>Git Basics</h3>
-                    <div class="code-block">
-                        <h4>Essential Git Commands:</h4>
-                        <pre><code># Initialize repository
+                <h2>🚀 Git Basics</h2>
+                <h3>Essential Git Commands</h3>
+                <pre><code># Initialize repository
 git init
 
 # Clone repository
@@ -63,10 +57,10 @@ git push origin main
 
 # Pull from remote
 git pull origin main</code></pre>
-                    </div>
 
-                    <h3>Branching Strategies</h3>
-                    <h4>1. Git Flow</h4>
+                <h2>🌱 Branching Strategies</h2>
+                <div class="info-box">
+                    <h3>1. 🌊 Git Flow</h3>
                     <ul>
                         <li><strong>main:</strong> Production-ready code</li>
                         <li><strong>develop:</strong> Integration branch</li>
@@ -74,10 +68,10 @@ git pull origin main</code></pre>
                         <li><strong>release/*:</strong> Release preparation</li>
                         <li><strong>hotfix/*:</strong> Critical fixes</li>
                     </ul>
+                </div>
 
-                    <div class="code-block">
-                        <h4>Git Flow Commands:</h4>
-                        <pre><code># Initialize Git Flow
+                <h3>Git Flow Commands</h3>
+                <pre><code># Initialize Git Flow
 git flow init
 
 # Start feature
@@ -91,10 +85,10 @@ git flow release start 1.0.0
 
 # Finish release
 git flow release finish 1.0.0</code></pre>
-                    </div>
 
-                    <h4>2. GitHub Flow</h4>
-                    <p>Simpler workflow for continuous deployment:</p>
+                <div class="info-box">
+                    <h3>2. 🔄 GitHub Flow</h3>
+                    <p>Simpler workflow for <strong>continuous deployment</strong>:</p>
                     <ol>
                         <li>Create branch from main</li>
                         <li>Make changes and commit</li>
@@ -102,11 +96,11 @@ git flow release finish 1.0.0</code></pre>
                         <li>Review and merge</li>
                         <li>Deploy from main</li>
                     </ol>
+                </div>
 
-                    <h3>Advanced Git Operations</h3>
-                    <div class="code-block">
-                        <h4>Branching and Merging:</h4>
-                        <pre><code># Create and switch to branch
+                <h2>⚙️ Advanced Git Operations</h2>
+                <h3>Branching and Merging</h3>
+                <pre><code># Create and switch to branch
 git checkout -b feature-branch
 
 # Switch branches
@@ -123,32 +117,34 @@ git rebase main
 
 # Interactive rebase
 git rebase -i HEAD~3</code></pre>
-                    </div>
 
-                    <h3>Collaboration Workflows</h3>
-                    <h4>Pull Request Process:</h4>
+                <h2>🤝 Collaboration Workflows</h2>
+                <div class="info-box">
+                    <h3>Pull Request Process</h3>
                     <ol>
-                        <li>Fork repository (if external contributor)</li>
-                        <li>Create feature branch</li>
-                        <li>Make changes and commit</li>
-                        <li>Push branch to remote</li>
-                        <li>Create pull request</li>
-                        <li>Code review and discussion</li>
-                        <li>Merge after approval</li>
+                        <li><strong>Fork:</strong> Fork repository (if external contributor)</li>
+                        <li><strong>Branch:</strong> Create feature branch</li>
+                        <li><strong>Develop:</strong> Make changes and commit</li>
+                        <li><strong>Push:</strong> Push branch to remote</li>
+                        <li><strong>PR:</strong> Create pull request</li>
+                        <li><strong>Review:</strong> Code review and discussion</li>
+                        <li><strong>Merge:</strong> Merge after approval</li>
                     </ol>
+                </div>
 
-                    <h3>Git Best Practices</h3>
+                <div class="highlight-box">
+                    <h2>💡 Git Best Practices</h2>
                     <ul>
-                        <li>Write clear, descriptive commit messages</li>
-                        <li>Commit frequently with logical changes</li>
-                        <li>Use .gitignore for unnecessary files</li>
-                        <li>Keep branches focused and short-lived</li>
-                        <li>Use signed commits for security</li>
+                        <li><strong>Commit Messages:</strong> Write clear, descriptive commit messages</li>
+                        <li><strong>Frequency:</strong> Commit frequently with logical changes</li>
+                        <li><strong>Ignore Files:</strong> Use .gitignore for unnecessary files</li>
+                        <li><strong>Branch Management:</strong> Keep branches focused and short-lived</li>
+                        <li><strong>Security:</strong> Use signed commits for verification</li>
                     </ul>
+                </div>
 
-                    <div class="code-block">
-                        <h4>Git Configuration:</h4>
-                        <pre><code># Set user information
+                <h3>Git Configuration</h3>
+                <pre><code># Set user information
 git config --global user.name "Your Name"
 git config --global user.email "your.email@example.com"
 
@@ -164,12 +160,10 @@ git config --global alias.st status
 git config --global alias.co checkout
 git config --global alias.br branch
 git config --global alias.ci commit</code></pre>
-                    </div>
 
-                    <h3>Troubleshooting Common Issues</h3>
-                    <div class="code-block">
-                        <h4>Common Git Commands for Fixes:</h4>
-                        <pre><code># Undo last commit (keep changes)
+                <h2>🔧 Troubleshooting Common Issues</h2>
+                <h3>Common Git Commands for Fixes</h3>
+                <pre><code># Undo last commit (keep changes)
 git reset --soft HEAD~1
 
 # Undo last commit (discard changes)
@@ -190,16 +184,15 @@ git status
 # Edit conflicted files
 git add .
 git commit</code></pre>
-                    </div>
+                
+                <h2>🎯 Conclusion</h2>
+                <p>Git mastery is <strong>essential for modern DevOps workflows</strong>. Understanding version control enables effective collaboration, code management, and deployment automation.</p>
+                
+                <div class="info-box">
+                    <p><strong>Success Strategy:</strong> Practice Git daily, understand branching strategies, and implement proper workflows for team collaboration and code quality.</p>
                 </div>
-            </article>
-        </div>
-    </main>
-
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 DevOps Mastery Blog by Rishi Gupta. All rights reserved.</p>
-        </div>
-    </footer>
+            </div>
+        </article>
+    </div>
 </body>
 </html>
