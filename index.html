@@ -6,6 +6,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
+    <meta name="cache-bust" content="<?php echo time(); ?>">
     <title>DevOps Mastery Blog | Rishi Gupta - Azure DevOps, CI/CD, Docker, Kubernetes</title>
     <meta name="description" content="Professional DevOps blog covering Azure DevOps, CI/CD, Docker, Kubernetes, Terraform, and cloud automation from beginner to advanced levels.">
     <meta name="keywords" content="DevOps, Azure DevOps, CI/CD, Docker, Kubernetes, AWS, Azure, Terraform, Jenkins, Ansible, Cloud Computing">
@@ -307,197 +308,106 @@
         const blogData = {
             beginner: [
                 {
-                    title: "DevOps Fundamentals",
-                    description: "Understanding DevOps culture, principles, and core concepts",
+                    title: "Getting Started with DevOps",
+                    description: "Complete beginner's guide to DevOps culture and practices",
                     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400",
                     command: "# DevOps = Development + Operations + Culture",
-                    link: "posts/devops-fundamentals.html"
+                    link: "posts/getting-started-devops.html"
                 },
-                {
-                    title: "DevOps Tools Overview",
-                    description: "Introduction to Azure DevOps, Jenkins, GitLab CI, and other tools",
-                    image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400",
-                    command: "az devops configure --defaults organization=https://dev.azure.com/myorg",
-                    link: "posts/azure-devops-complete-guide.html"
-                },
-                {
-                    title: "Version Control Systems",
-                    description: "Git basics, branching strategies, and collaboration workflows",
-                    image: "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?w=400",
-                    command: "git clone https://github.com/user/repo.git",
-                    link: "posts/git-version-control.html"
-                },
-                {
-                    title: "CI/CD Pipelines",
-                    description: "Continuous Integration and Deployment fundamentals",
-                    image: "https://images.unsplash.com/photo-1618477247222-acbdb0e159b3?w=400",
-                    command: "git push origin main # Triggers CI/CD pipeline",
-                    link: "posts/jenkins-cicd-pipeline.html"
-                },
-                {
-                    title: "Containerization (Docker)",
-                    description: "Container basics and Docker fundamentals for beginners",
-                    image: "https://images.unsplash.com/photo-1605745341112-85968b19335b?w=400",
-                    command: "docker run -p 8080:80 nginx",
-                    link: "posts/docker-containerization.html"
-                },
-                {
-                    title: "Container Orchestration",
-                    description: "Introduction to Kubernetes and container management",
-                    image: "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=400",
-                    command: "kubectl get pods",
-                    link: "posts/kubernetes-orchestration.html"
-                },
-                {
-                    title: "Infrastructure as Code",
-                    description: "Getting started with Terraform and infrastructure automation",
-                    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400",
-                    command: "terraform init && terraform plan",
-                    link: "posts/terraform-infrastructure-code.html"
-                },
-                {
-                    title: "Monitoring & Observability",
-                    description: "Application and infrastructure monitoring basics",
-                    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400",
-                    command: "docker run -p 3000:3000 grafana/grafana",
-                    link: "posts/prometheus-grafana-monitoring.html"
-                },
-                {
-                    title: "Cloud Platforms",
-                    description: "Deploy applications to AWS, Azure, and GCP",
-                    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400",
-                    command: "aws s3 cp app.zip s3://my-bucket/",
-                    link: "posts/aws-cloud-fundamentals.html"
-                }
-            ],
-            intermediate: [
                 {
                     title: "DevOps Fundamentals",
-                    description: "Advanced DevOps practices, team collaboration, and process optimization",
-                    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400",
+                    description: "Understanding DevOps culture, principles, and core concepts",
+                    image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400",
                     command: "# Implementing DevOps transformation strategies",
                     link: "posts/devops-fundamentals.html"
                 },
                 {
-                    title: "DevOps Tools Overview",
+                    title: "Linux Fundamentals",
+                    description: "Essential Linux skills for DevOps engineers",
+                    image: "https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=400",
+                    command: "sudo systemctl status nginx",
+                    link: "posts/linux-fundamentals.html"
+                },
+                {
+                    title: "Git & Version Control",
+                    description: "Git basics, branching strategies, and collaboration workflows",
+                    image: "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?w=400",
+                    command: "git clone https://github.com/user/repo.git",
+                    link: "posts/git-version-control.html"
+                }
+            ],
+            intermediate: [
+                {
+                    title: "Azure DevOps Complete Guide",
                     description: "Advanced Azure DevOps, Jenkins pipelines, and GitOps workflows",
                     image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400",
                     command: "az pipelines create --name MyPipeline --yml azure-pipelines.yml",
                     link: "posts/azure-devops-complete-guide.html"
                 },
                 {
-                    title: "Version Control Systems",
-                    description: "Advanced Git workflows, merge strategies, and repository management",
-                    image: "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?w=400",
-                    command: "git flow init && git flow feature start new-feature",
-                    link: "posts/git-version-control.html"
-                },
-                {
-                    title: "CI/CD Pipelines",
+                    title: "Jenkins CI/CD Pipeline",
                     description: "Multi-stage pipelines, automated testing, and deployment strategies",
                     image: "https://images.unsplash.com/photo-1618477247222-acbdb0e159b3?w=400",
                     command: "helm install myapp ./chart --set image.tag=v1.2.3",
                     link: "posts/jenkins-cicd-pipeline.html"
                 },
                 {
-                    title: "Containerization (Docker)",
+                    title: "Docker Containerization",
                     description: "Multi-container applications, Docker Compose, and networking",
                     image: "https://images.unsplash.com/photo-1605745341112-85968b19335b?w=400",
                     command: "docker-compose up -d --scale web=3",
                     link: "posts/docker-containerization.html"
                 },
                 {
-                    title: "Container Orchestration",
-                    description: "Kubernetes services, ingress controllers, and advanced networking",
-                    image: "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=400",
-                    command: "kubectl rollout restart deployment/myapp",
-                    link: "posts/kubernetes-orchestration.html"
+                    title: "Docker Fundamentals",
+                    description: "Container basics and Docker fundamentals for production",
+                    image: "https://images.unsplash.com/photo-1605745341112-85968b19335b?w=400",
+                    command: "docker run -p 8080:80 nginx",
+                    link: "posts/docker-fundamentals.html"
                 },
                 {
-                    title: "Infrastructure as Code",
-                    description: "Terraform modules, state management, and advanced configurations",
-                    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400",
-                    command: "terraform apply -var-file=prod.tfvars",
-                    link: "posts/terraform-infrastructure-code.html"
-                },
-                {
-                    title: "Monitoring & Observability",
-                    description: "Custom metrics, alerting, and distributed tracing",
-                    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400",
-                    command: "prometheus --config.file=prometheus.yml --web.listen-address=:9090",
-                    link: "posts/prometheus-grafana-monitoring.html"
-                },
-                {
-                    title: "Cloud Platforms",
+                    title: "AWS Cloud Fundamentals",
                     description: "Multi-cloud strategies and advanced deployment patterns",
                     image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400",
-                    command: "az aks get-credentials --resource-group myRG --name myCluster",
+                    command: "aws s3 cp app.zip s3://my-bucket/",
                     link: "posts/aws-cloud-fundamentals.html"
                 }
             ],
             advanced: [
                 {
-                    title: "DevOps Fundamentals",
-                    description: "Enterprise DevOps transformation, culture change, and organizational scaling",
-                    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400",
-                    command: "# Leading enterprise DevOps transformation",
-                    link: "posts/devops-fundamentals.html"
-                },
-                {
-                    title: "DevOps Tools Overview",
-                    description: "Enterprise Azure DevOps, security, compliance, and governance",
-                    image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400",
-                    command: "az pipelines variable-group create --name prod-secrets --variables key1=value1",
-                    link: "posts/azure-devops-complete-guide.html"
-                },
-                {
-                    title: "Version Control Systems",
-                    description: "Enterprise Git strategies, security, and large-scale repository management",
-                    image: "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?w=400",
-                    command: "git config --global commit.gpgsign true",
-                    link: "posts/git-version-control.html"
-                },
-                {
-                    title: "CI/CD Pipelines",
-                    description: "GitOps, security scanning, and enterprise automation",
-                    image: "https://images.unsplash.com/photo-1618477247222-acbdb0e159b3?w=400",
-                    command: "az pipelines create --name prod-pipeline --yml .azure/pipelines/production.yml",
-                    link: "posts/jenkins-cicd-pipeline.html"
-                },
-                {
-                    title: "Containerization (Docker)",
-                    description: "Container security, image optimization, and production hardening",
-                    image: "https://images.unsplash.com/photo-1605745341112-85968b19335b?w=400",
-                    command: "trivy image --severity HIGH,CRITICAL nginx:latest",
-                    link: "posts/docker-containerization.html"
-                },
-                {
-                    title: "Container Orchestration",
+                    title: "Kubernetes Basics",
                     description: "Production Kubernetes with RBAC, policies, and security",
                     image: "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=400",
                     command: "kubectl apply -f network-policy.yaml --dry-run=server",
+                    link: "posts/kubernetes-basics.html"
+                },
+                {
+                    title: "Kubernetes Orchestration",
+                    description: "Advanced Kubernetes services, ingress controllers, and networking",
+                    image: "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=400",
+                    command: "kubectl rollout restart deployment/myapp",
                     link: "posts/kubernetes-orchestration.html"
                 },
                 {
-                    title: "Infrastructure as Code",
+                    title: "Kubernetes Istio Service Mesh",
+                    description: "Advanced service mesh with Istio for microservices",
+                    image: "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=400",
+                    command: "istioctl install --set values.defaultRevision=default",
+                    link: "posts/kubernetes-istio-service-mesh.html"
+                },
+                {
+                    title: "Terraform Infrastructure as Code",
                     description: "Enterprise IaC with remote state, workspaces, and automation",
                     image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400",
                     command: "terraform workspace select production && terraform apply -auto-approve",
                     link: "posts/terraform-infrastructure-code.html"
                 },
                 {
-                    title: "Monitoring & Observability",
+                    title: "Prometheus & Grafana Monitoring",
                     description: "Enterprise observability, SLOs, and distributed tracing",
                     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400",
-                    command: "jaeger-all-in-one --collector.zipkin.host-port=:9411",
+                    command: "prometheus --config.file=prometheus.yml --web.listen-address=:9090",
                     link: "posts/prometheus-grafana-monitoring.html"
-                },
-                {
-                    title: "Cloud Platforms",
-                    description: "Scalable cloud architectures and enterprise deployment strategies",
-                    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400",
-                    command: "aws configure set region us-west-2 --profile production",
-                    link: "posts/aws-cloud-fundamentals.html"
                 }
             ]
         };
