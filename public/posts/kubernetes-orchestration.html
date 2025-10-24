@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kubernetes Orchestration: Complete Guide</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="blog-post">
+        <a href="../index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i> Back to Blog
+        </a>
+        
+        <article>
+            <header class="blog-post-header">
+                <h1 class="blog-post-title">Kubernetes Orchestration: Complete Guide</h1>
+                <div class="blog-post-meta">
+                    <span><i class="fas fa-calendar"></i> January 8, 2025</span>
+                    <span><i class="fas fa-clock"></i> 20 min read</span>
+                    <span><i class="fas fa-tag"></i> Intermediate</span>
+                </div>
+            </header>
+            
+            <div class="blog-post-content">
+                <h2>What is Kubernetes?</h2>
+                <p>Kubernetes (K8s) is an open-source container orchestration platform that automates deployment, scaling, and management of containerized applications across clusters of hosts.</p>
+                
+                <h2>Core Kubernetes Components</h2>
+                <h3>Master Node Components</h3>
+                <ul>
+                    <li><strong>API Server:</strong> Central management entity</li>
+                    <li><strong>etcd:</strong> Distributed key-value store</li>
+                    <li><strong>Scheduler:</strong> Assigns pods to nodes</li>
+                    <li><strong>Controller Manager:</strong> Manages cluster state</li>
+                </ul>
+                
+                <h3>Worker Node Components</h3>
+                <ul>
+                    <li><strong>kubelet:</strong> Node agent</li>
+                    <li><strong>kube-proxy:</strong> Network proxy</li>
+                    <li><strong>Container Runtime:</strong> Docker, containerd, etc.</li>
+                </ul>
+                
+                <h2>Kubernetes Objects</h2>
+                <h3>Pods</h3>
+                <p>Smallest deployable units containing one or more containers:</p>
+                <pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.20
+    ports:
+    - containerPort: 80</code></pre>
+                
+                <h3>Deployments</h3>
+                <p>Manage replica sets and rolling updates:</p>
+                <pre><code>apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.20
+        ports:
+        - containerPort: 80</code></pre>
+                
+                <h3>Services</h3>
+                <p>Expose applications running on pods:</p>
+                <pre><code>apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    app: nginx
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: LoadBalancer</code></pre>
+                
+                <h2>Essential kubectl Commands</h2>
+                <pre><code># Get cluster information
+kubectl cluster-info
+
+# List all pods
+kubectl get pods
+
+# Describe a pod
+kubectl describe pod nginx-pod
+
+# Apply configuration
+kubectl apply -f deployment.yaml
+
+# Scale deployment
+kubectl scale deployment nginx-deployment --replicas=5
+
+# Get logs
+kubectl logs nginx-pod
+
+# Execute commands in pod
+kubectl exec -it nginx-pod -- /bin/bash</code></pre>
+                
+                <h2>ConfigMaps and Secrets</h2>
+                <h3>ConfigMaps</h3>
+                <p>Store configuration data:</p>
+                <pre><code>apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  database_url: "postgresql://localhost:5432/mydb"
+  debug_mode: "true"</code></pre>
+                
+                <h3>Secrets</h3>
+                <p>Store sensitive information:</p>
+                <pre><code>apiVersion: v1
+kind: Secret
+metadata:
+  name: app-secret
+type: Opaque
+data:
+  username: YWRtaW4=  # base64 encoded
+  password: MWYyZDFlMmU2N2Rm  # base64 encoded</code></pre>
+                
+                <h2>Persistent Volumes</h2>
+                <p>Provide persistent storage:</p>
+                <pre><code>apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-storage
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data"</code></pre>
+                
+                <h2>Ingress Controllers</h2>
+                <p>Manage external access to services:</p>
+                <pre><code>apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+spec:
+  rules:
+  - host: myapp.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx-service
+            port:
+              number: 80</code></pre>
+                
+                <h2>Monitoring and Logging</h2>
+                <h3>Health Checks</h3>
+                <pre><code>spec:
+  containers:
+  - name: app
+    image: myapp:latest
+    livenessProbe:
+      httpGet:
+        path: /health
+        port: 8080
+      initialDelaySeconds: 30
+      periodSeconds: 10
+    readinessProbe:
+      httpGet:
+        path: /ready
+        port: 8080
+      initialDelaySeconds: 5
+      periodSeconds: 5</code></pre>
+                
+                <h2>Best Practices</h2>
+                <ul>
+                    <li>Use namespaces for resource organization</li>
+                    <li>Implement resource limits and requests</li>
+                    <li>Use labels and selectors effectively</li>
+                    <li>Implement proper health checks</li>
+                    <li>Use Helm for package management</li>
+                    <li>Implement RBAC for security</li>
+                    <li>Monitor cluster and application metrics</li>
+                </ul>
+                
+                <h2>Conclusion</h2>
+                <p>Kubernetes provides powerful orchestration capabilities for containerized applications. Master these core concepts and gradually explore advanced features like operators, custom resources, and service meshes to fully leverage Kubernetes in production environments.</p>
+            </div>
+        </article>
+    </div>
+</body>
+</html>
