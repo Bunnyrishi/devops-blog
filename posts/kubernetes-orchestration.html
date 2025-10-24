@@ -33,24 +33,28 @@
                     "Kubernetes is a portable, extensible, open-source platform for managing containerized workloads and services, that facilitates both declarative configuration and automation." - Kubernetes Documentation
                 </blockquote>
                 
-                <h2>Core Kubernetes Components</h2>
-                <h3>Master Node Components</h3>
-                <ul>
-                    <li><strong>API Server:</strong> Central management entity</li>
-                    <li><strong>etcd:</strong> Distributed key-value store</li>
-                    <li><strong>Scheduler:</strong> Assigns pods to nodes</li>
-                    <li><strong>Controller Manager:</strong> Manages cluster state</li>
-                </ul>
+                <h2>🏗️ Core Kubernetes Components</h2>
+                <div class="info-box">
+                    <h3>Master Node Components</h3>
+                    <ul>
+                        <li><strong>API Server:</strong> Central management entity</li>
+                        <li><strong>etcd:</strong> Distributed key-value store</li>
+                        <li><strong>Scheduler:</strong> Assigns pods to nodes</li>
+                        <li><strong>Controller Manager:</strong> Manages cluster state</li>
+                    </ul>
+                </div>
                 
-                <h3>Worker Node Components</h3>
-                <ul>
-                    <li><strong>kubelet:</strong> Node agent</li>
-                    <li><strong>kube-proxy:</strong> Network proxy</li>
-                    <li><strong>Container Runtime:</strong> Docker, containerd, etc.</li>
-                </ul>
+                <div class="info-box">
+                    <h3>Worker Node Components</h3>
+                    <ul>
+                        <li><strong>kubelet:</strong> Node agent</li>
+                        <li><strong>kube-proxy:</strong> Network proxy</li>
+                        <li><strong>Container Runtime:</strong> Docker, containerd, etc.</li>
+                    </ul>
+                </div>
                 
-                <h2>Kubernetes Objects</h2>
-                <h3>Pods</h3>
+                <h2>📦 Kubernetes Objects</h2>
+                <h3>🚀 Pods</h3>
                 <p>Smallest deployable units containing one or more containers:</p>
                 <pre><code>apiVersion: v1
 kind: Pod
@@ -63,7 +67,7 @@ spec:
     ports:
     - containerPort: 80</code></pre>
                 
-                <h3>Deployments</h3>
+                <h3>📋 Deployments</h3>
                 <p>Manage replica sets and rolling updates:</p>
                 <pre><code>apiVersion: apps/v1
 kind: Deployment
@@ -85,7 +89,7 @@ spec:
         ports:
         - containerPort: 80</code></pre>
                 
-                <h3>Services</h3>
+                <h3>🌐 Services</h3>
                 <p>Expose applications running on pods:</p>
                 <pre><code>apiVersion: v1
 kind: Service
@@ -100,7 +104,7 @@ spec:
     targetPort: 80
   type: LoadBalancer</code></pre>
                 
-                <h2>Essential kubectl Commands</h2>
+                <h2>💻 Essential kubectl Commands</h2>
                 <pre><code># Get cluster information
 kubectl cluster-info
 
@@ -122,9 +126,11 @@ kubectl logs nginx-pod
 # Execute commands in pod
 kubectl exec -it nginx-pod -- /bin/bash</code></pre>
                 
-                <h2>ConfigMaps and Secrets</h2>
-                <h3>ConfigMaps</h3>
-                <p>Store configuration data:</p>
+                <h2>🔧 ConfigMaps and Secrets</h2>
+                <div class="info-box">
+                    <h3>ConfigMaps</h3>
+                    <p>Store non-sensitive configuration data:</p>
+                </div>
                 <pre><code>apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -133,8 +139,10 @@ data:
   database_url: "postgresql://localhost:5432/mydb"
   debug_mode: "true"</code></pre>
                 
-                <h3>Secrets</h3>
-                <p>Store sensitive information:</p>
+                <div class="info-box">
+                    <h3>Secrets</h3>
+                    <p>Store sensitive information securely:</p>
+                </div>
                 <pre><code>apiVersion: v1
 kind: Secret
 metadata:
@@ -144,8 +152,8 @@ data:
   username: YWRtaW4=  # base64 encoded
   password: MWYyZDFlMmU2N2Rm  # base64 encoded</code></pre>
                 
-                <h2>Persistent Volumes</h2>
-                <p>Provide persistent storage:</p>
+                <h2>💾 Persistent Volumes</h2>
+                <p>Provide <strong>persistent storage</strong> for applications:</p>
                 <pre><code>apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -158,8 +166,8 @@ spec:
   hostPath:
     path: "/mnt/data"</code></pre>
                 
-                <h2>Ingress Controllers</h2>
-                <p>Manage external access to services:</p>
+                <h2>🌍 Ingress Controllers</h2>
+                <p>Manage <strong>external access</strong> to services:</p>
                 <pre><code>apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -177,8 +185,8 @@ spec:
             port:
               number: 80</code></pre>
                 
-                <h2>Monitoring and Logging</h2>
-                <h3>Health Checks</h3>
+                <h2>📊 Monitoring and Logging</h2>
+                <h3>🏥 Health Checks</h3>
                 <pre><code>spec:
   containers:
   - name: app
@@ -196,19 +204,25 @@ spec:
       initialDelaySeconds: 5
       periodSeconds: 5</code></pre>
                 
-                <h2>Best Practices</h2>
-                <ul>
-                    <li>Use namespaces for resource organization</li>
-                    <li>Implement resource limits and requests</li>
-                    <li>Use labels and selectors effectively</li>
-                    <li>Implement proper health checks</li>
-                    <li>Use Helm for package management</li>
-                    <li>Implement RBAC for security</li>
-                    <li>Monitor cluster and application metrics</li>
-                </ul>
+                <div class="highlight-box">
+                    <h2>💡 Best Practices</h2>
+                    <ul>
+                        <li><strong>Namespaces:</strong> Use namespaces for resource organization</li>
+                        <li><strong>Resources:</strong> Implement resource limits and requests</li>
+                        <li><strong>Labels:</strong> Use labels and selectors effectively</li>
+                        <li><strong>Health Checks:</strong> Implement proper liveness/readiness probes</li>
+                        <li><strong>Package Management:</strong> Use Helm for application deployment</li>
+                        <li><strong>Security:</strong> Implement RBAC for access control</li>
+                        <li><strong>Monitoring:</strong> Monitor cluster and application metrics</li>
+                    </ul>
+                </div>
                 
-                <h2>Conclusion</h2>
-                <p>Kubernetes provides powerful orchestration capabilities for containerized applications. Master these core concepts and gradually explore advanced features like operators, custom resources, and service meshes to fully leverage Kubernetes in production environments.</p>
+                <h2>🎯 Conclusion</h2>
+                <p>Kubernetes provides <strong>powerful orchestration capabilities</strong> for containerized applications. Master these core concepts and gradually explore advanced features like operators, custom resources, and service meshes.</p>
+                
+                <div class="info-box">
+                    <p><strong>Next Steps:</strong> Practice with local clusters using minikube or kind, then advance to production deployments with managed Kubernetes services.</p>
+                </div>
             </div>
         </article>
     </div>
