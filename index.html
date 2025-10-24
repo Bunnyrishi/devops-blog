@@ -392,10 +392,46 @@
             const searchInput = document.getElementById('searchInput');
             searchInput.addEventListener('input', (e) => {
                 const query = e.target.value.toLowerCase();
-                document.querySelectorAll('.card-hover').forEach(card => {
-                    const title = card.querySelector('h3').textContent.toLowerCase();
-                    const description = card.querySelector('p').textContent.toLowerCase();
-                    card.style.display = (title.includes(query) || description.includes(query)) ? 'block' : 'none';
+                
+                if (query.trim() === '') {
+                    // Reset all sections to closed state
+                    document.querySelectorAll('.dropdown-content').forEach(content => {
+                        content.classList.remove('active');
+                        const icon = content.previousElementSibling.querySelector('.fa-chevron-down');
+                        if (icon) icon.style.transform = 'rotate(0deg)';
+                    });
+                    return;
+                }
+                
+                // Search across all blog data and show matching sections
+                let hasResults = false;
+                Object.keys(blogData).forEach(level => {
+                    const section = document.getElementById(level);
+                    const cards = section.querySelectorAll('.card-hover');
+                    let sectionHasResults = false;
+                    
+                    cards.forEach(card => {
+                        const title = card.querySelector('h3').textContent.toLowerCase();
+                        const description = card.querySelector('p').textContent.toLowerCase();
+                        const matches = title.includes(query) || description.includes(query);
+                        
+                        card.style.display = matches ? 'block' : 'none';
+                        if (matches) {
+                            sectionHasResults = true;
+                            hasResults = true;
+                        }
+                    });
+                    
+                    // Auto-expand sections with results
+                    if (sectionHasResults) {
+                        section.classList.add('active');
+                        const icon = section.previousElementSibling.querySelector('.fa-chevron-down');
+                        if (icon) icon.style.transform = 'rotate(180deg)';
+                    } else {
+                        section.classList.remove('active');
+                        const icon = section.previousElementSibling.querySelector('.fa-chevron-down');
+                        if (icon) icon.style.transform = 'rotate(0deg)';
+                    }
                 });
             });
         }
