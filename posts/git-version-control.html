@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Version Control with Git</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="blog-post">
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i> Back to Blog
+        </a>
+        
+        <article>
+            <header class="blog-post-header">
+                <h1 class="blog-post-title">Introduction to Version Control with Git</h1>
+                <div class="blog-post-meta">
+                    <span><i class="fas fa-calendar"></i> January 14, 2025</span>
+                    <span><i class="fas fa-clock"></i> 10 min read</span>
+                    <span><i class="fas fa-tag"></i> Beginner</span>
+                </div>
+            </header>
+            
+            <div class="blog-post-content">
+                <h2>What is Version Control?</h2>
+                <p>Version control is a system that records changes to files over time, allowing you to recall specific versions later. It's essential for tracking code changes, collaborating with teams, and maintaining project history.</p>
+                
+                <h2>Why Git?</h2>
+                <p>Git is a distributed version control system that offers:</p>
+                <ul>
+                    <li>Distributed architecture - every clone is a full backup</li>
+                    <li>Branching and merging capabilities</li>
+                    <li>Speed and efficiency</li>
+                    <li>Data integrity through checksums</li>
+                </ul>
+                
+                <h2>Basic Git Commands</h2>
+                <h3>Repository Setup</h3>
+                <pre><code># Initialize a new repository
+git init
+
+# Clone existing repository
+git clone https://github.com/user/repo.git
+
+# Check repository status
+git status</code></pre>
+                
+                <h3>Basic Workflow</h3>
+                <pre><code># Add files to staging area
+git add filename.txt
+git add .  # Add all files
+
+# Commit changes
+git commit -m "Add new feature"
+
+# Push to remote repository
+git push origin main</code></pre>
+                
+                <h2>Branching Strategy</h2>
+                <h3>Creating and Managing Branches</h3>
+                <pre><code># Create new branch
+git branch feature-branch
+
+# Switch to branch
+git checkout feature-branch
+
+# Create and switch in one command
+git checkout -b feature-branch
+
+# List all branches
+git branch -a</code></pre>
+                
+                <h3>Merging Branches</h3>
+                <pre><code># Switch to main branch
+git checkout main
+
+# Merge feature branch
+git merge feature-branch
+
+# Delete merged branch
+git branch -d feature-branch</code></pre>
+                
+                <h2>Remote Repositories</h2>
+                <pre><code># Add remote repository
+git remote add origin https://github.com/user/repo.git
+
+# View remote repositories
+git remote -v
+
+# Fetch changes from remote
+git fetch origin
+
+# Pull changes (fetch + merge)
+git pull origin main</code></pre>
+                
+                <h2>Git Workflow Best Practices</h2>
+                <h3>Commit Messages</h3>
+                <ul>
+                    <li>Use present tense: "Add feature" not "Added feature"</li>
+                    <li>Keep first line under 50 characters</li>
+                    <li>Be descriptive and specific</li>
+                    <li>Reference issue numbers when applicable</li>
+                </ul>
+                
+                <h3>Branching Strategy</h3>
+                <ul>
+                    <li><strong>Main/Master:</strong> Production-ready code</li>
+                    <li><strong>Develop:</strong> Integration branch for features</li>
+                    <li><strong>Feature branches:</strong> Individual features</li>
+                    <li><strong>Hotfix branches:</strong> Critical production fixes</li>
+                </ul>
+                
+                <h2>Resolving Conflicts</h2>
+                <pre><code># When merge conflicts occur
+git status  # See conflicted files
+
+# Edit files to resolve conflicts
+# Look for conflict markers: <<<<<<<, =======, >>>>>>>
+
+# After resolving conflicts
+git add resolved-file.txt
+git commit -m "Resolve merge conflict"</code></pre>
+                
+                <h2>Useful Git Commands</h2>
+                <pre><code># View commit history
+git log --oneline --graph
+
+# Undo last commit (keep changes)
+git reset --soft HEAD~1
+
+# Undo last commit (discard changes)
+git reset --hard HEAD~1
+
+# Stash changes temporarily
+git stash
+git stash pop
+
+# View differences
+git diff
+git diff --staged</code></pre>
+                
+                <h2>Git Configuration</h2>
+                <pre><code># Set global user information
+git config --global user.name "Your Name"
+git config --global user.email "your.email@example.com"
+
+# Set default editor
+git config --global core.editor "code --wait"
+
+# View configuration
+git config --list</code></pre>
+                
+                <h2>Conclusion</h2>
+                <p>Git is fundamental to modern software development. Master these basic commands and workflows to collaborate effectively with teams and maintain clean project history. Practice regularly and gradually explore advanced features like rebasing, cherry-picking, and hooks.</p>
+            </div>
+        </article>
+    </div>
+</body>
+</html>

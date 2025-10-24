@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux Fundamentals for DevOps Engineers</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="blog-post">
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i> Back to Blog
+        </a>
+        
+        <article>
+            <header class="blog-post-header">
+                <h1 class="blog-post-title">Linux Fundamentals for DevOps Engineers</h1>
+                <div class="blog-post-meta">
+                    <span><i class="fas fa-calendar"></i> January 13, 2025</span>
+                    <span><i class="fas fa-clock"></i> 12 min read</span>
+                    <span><i class="fas fa-tag"></i> Beginner</span>
+                </div>
+            </header>
+            
+            <div class="blog-post-content">
+                <h2>Why Linux for DevOps?</h2>
+                <p>Linux powers most servers, cloud instances, and containers. As a DevOps engineer, Linux proficiency is essential for managing infrastructure, automating deployments, and troubleshooting systems.</p>
+                
+                <h2>Essential Linux Commands</h2>
+                <h3>File and Directory Operations</h3>
+                <pre><code># Navigate directories
+pwd          # Print working directory
+ls -la       # List files with details
+cd /path     # Change directory
+mkdir dir    # Create directory
+rmdir dir    # Remove empty directory
+rm -rf dir   # Remove directory and contents
+
+# File operations
+touch file.txt      # Create empty file
+cp source dest      # Copy file
+mv old new          # Move/rename file
+rm file.txt         # Delete file</code></pre>
+                
+                <h3>File Permissions</h3>
+                <pre><code># View permissions
+ls -l file.txt
+
+# Change permissions
+chmod 755 script.sh    # rwxr-xr-x
+chmod +x script.sh     # Add execute permission
+chown user:group file  # Change ownership
+
+# Permission meanings
+# r (read) = 4, w (write) = 2, x (execute) = 1
+# 755 = rwxr-xr-x (owner: rwx, group: r-x, others: r-x)</code></pre>
+                
+                <h2>Process Management</h2>
+                <pre><code># View processes
+ps aux           # All running processes
+top              # Real-time process monitor
+htop             # Enhanced process monitor
+pgrep nginx      # Find process by name
+
+# Process control
+kill PID         # Terminate process
+killall nginx    # Kill all nginx processes
+nohup command &  # Run command in background
+jobs             # List background jobs</code></pre>
+                
+                <h2>System Information</h2>
+                <pre><code># System resources
+free -h          # Memory usage
+df -h            # Disk usage
+du -sh /path     # Directory size
+lscpu            # CPU information
+uname -a         # System information
+
+# Network information
+ifconfig         # Network interfaces
+ip addr show     # IP addresses
+netstat -tulpn   # Network connections
+ss -tulpn        # Socket statistics</code></pre>
+                
+                <h2>Text Processing</h2>
+                <pre><code># View file contents
+cat file.txt     # Display entire file
+less file.txt    # View file page by page
+head -n 10 file  # First 10 lines
+tail -f log      # Follow log file
+
+# Search and filter
+grep "pattern" file    # Search for pattern
+grep -r "text" /dir    # Recursive search
+find /path -name "*.log"  # Find files
+locate filename        # Quick file search
+
+# Text manipulation
+sed 's/old/new/g' file    # Replace text
+awk '{print $1}' file     # Print first column
+sort file.txt             # Sort lines
+uniq file.txt             # Remove duplicates</code></pre>
+                
+                <h2>Package Management</h2>
+                <h3>Ubuntu/Debian (apt)</h3>
+                <pre><code># Update package list
+sudo apt update
+
+# Install package
+sudo apt install nginx
+
+# Remove package
+sudo apt remove nginx
+
+# Search packages
+apt search keyword</code></pre>
+                
+                <h3>CentOS/RHEL (yum/dnf)</h3>
+                <pre><code># Install package
+sudo yum install nginx
+sudo dnf install nginx
+
+# Update system
+sudo yum update
+sudo dnf update</code></pre>
+                
+                <h2>Service Management (systemd)</h2>
+                <pre><code># Service control
+sudo systemctl start nginx
+sudo systemctl stop nginx
+sudo systemctl restart nginx
+sudo systemctl reload nginx
+
+# Service status
+systemctl status nginx
+systemctl is-active nginx
+systemctl is-enabled nginx
+
+# Enable/disable services
+sudo systemctl enable nginx   # Start on boot
+sudo systemctl disable nginx  # Don't start on boot</code></pre>
+                
+                <h2>File System and Storage</h2>
+                <pre><code># Mount/unmount
+sudo mount /dev/sdb1 /mnt
+sudo umount /mnt
+
+# Check disk usage
+df -h                    # File system usage
+du -sh /var/log         # Directory size
+lsblk                   # List block devices
+
+# File system check
+sudo fsck /dev/sdb1</code></pre>
+                
+                <h2>Environment Variables</h2>
+                <pre><code># View environment variables
+env
+echo $PATH
+echo $HOME
+
+# Set environment variables
+export VAR_NAME="value"
+export PATH=$PATH:/new/path
+
+# Persistent variables (add to ~/.bashrc)
+echo 'export VAR_NAME="value"' >> ~/.bashrc
+source ~/.bashrc</code></pre>
+                
+                <h2>Shell Scripting Basics</h2>
+                <pre><code>#!/bin/bash
+
+# Variables
+NAME="DevOps"
+echo "Hello $NAME"
+
+# Conditionals
+if [ -f "/etc/passwd" ]; then
+    echo "File exists"
+fi
+
+# Loops
+for i in {1..5}; do
+    echo "Number: $i"
+done
+
+# Functions
+function backup_logs() {
+    tar -czf logs_$(date +%Y%m%d).tar.gz /var/log/
+}
+
+backup_logs</code></pre>
+                
+                <h2>Log Management</h2>
+                <pre><code># System logs
+sudo journalctl -u nginx        # Service logs
+sudo journalctl -f              # Follow logs
+sudo journalctl --since "1 hour ago"
+
+# Log files locations
+/var/log/syslog                 # System messages
+/var/log/auth.log               # Authentication
+/var/log/nginx/access.log       # Nginx access
+/var/log/nginx/error.log        # Nginx errors</code></pre>
+                
+                <h2>Security Basics</h2>
+                <pre><code># User management
+sudo adduser username
+sudo usermod -aG sudo username  # Add to sudo group
+sudo passwd username            # Change password
+su - username                   # Switch user
+
+# SSH key management
+ssh-keygen -t rsa -b 4096
+ssh-copy-id user@server
+ssh user@server
+
+# Firewall (ufw)
+sudo ufw enable
+sudo ufw allow 22/tcp
+sudo ufw allow 80/tcp
+sudo ufw status</code></pre>
+                
+                <h2>Performance Monitoring</h2>
+                <pre><code># System monitoring
+top              # Process monitor
+htop             # Enhanced top
+iotop            # I/O monitor
+iftop            # Network monitor
+vmstat 1         # Virtual memory stats
+iostat 1         # I/O statistics</code></pre>
+                
+                <h2>Best Practices</h2>
+                <ul>
+                    <li>Always use sudo for administrative tasks</li>
+                    <li>Regularly update system packages</li>
+                    <li>Monitor system resources and logs</li>
+                    <li>Use SSH keys instead of passwords</li>
+                    <li>Implement proper backup strategies</li>
+                    <li>Follow the principle of least privilege</li>
+                    <li>Document system configurations</li>
+                </ul>
+                
+                <h2>Conclusion</h2>
+                <p>Linux mastery is crucial for DevOps success. Practice these commands regularly, understand the file system structure, and gradually explore advanced topics like kernel tuning, advanced networking, and system optimization.</p>
+            </div>
+        </article>
+    </div>
+</body>
+</html>

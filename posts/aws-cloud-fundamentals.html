@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Cloud Fundamentals for DevOps</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="blog-post">
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i> Back to Blog
+        </a>
+        
+        <article>
+            <header class="blog-post-header">
+                <h1 class="blog-post-title">AWS Cloud Fundamentals for DevOps</h1>
+                <div class="blog-post-meta">
+                    <span><i class="fas fa-calendar"></i> January 11, 2025</span>
+                    <span><i class="fas fa-clock"></i> 14 min read</span>
+                    <span><i class="fas fa-tag"></i> Beginner</span>
+                </div>
+            </header>
+            
+            <div class="blog-post-content">
+                <h2>Introduction to AWS</h2>
+                <p>Amazon Web Services (AWS) is the world's most comprehensive cloud platform, offering over 200 services including compute, storage, networking, databases, and machine learning capabilities.</p>
+                
+                <h2>Core AWS Services for DevOps</h2>
+                
+                <h3>Compute Services</h3>
+                <h4>EC2 (Elastic Compute Cloud)</h4>
+                <p>Virtual servers in the cloud:</p>
+                <pre><code># Launch EC2 instance using AWS CLI
+aws ec2 run-instances \
+    --image-id ami-0abcdef1234567890 \
+    --count 1 \
+    --instance-type t3.micro \
+    --key-name my-key-pair \
+    --security-group-ids sg-903004f8 \
+    --subnet-id subnet-6e7f829e</code></pre>
+                
+                <h4>Lambda</h4>
+                <p>Serverless compute service:</p>
+                <pre><code># Simple Lambda function
+import json
+
+def lambda_handler(event, context):
+    return {
+        'statusCode': 200,
+        'body': json.dumps('Hello from Lambda!')
+    }</code></pre>
+                
+                <h3>Storage Services</h3>
+                <h4>S3 (Simple Storage Service)</h4>
+                <pre><code># AWS CLI S3 commands
+aws s3 mb s3://my-devops-bucket
+aws s3 cp file.txt s3://my-devops-bucket/
+aws s3 sync ./local-folder s3://my-devops-bucket/folder/
+aws s3 ls s3://my-devops-bucket/</code></pre>
+                
+                <h4>EBS (Elastic Block Store)</h4>
+                <pre><code># Create and attach EBS volume
+aws ec2 create-volume \
+    --size 10 \
+    --volume-type gp3 \
+    --availability-zone us-west-2a
+
+aws ec2 attach-volume \
+    --volume-id vol-1234567890abcdef0 \
+    --instance-id i-1234567890abcdef0 \
+    --device /dev/sdf</code></pre>
+                
+                <h2>Networking</h2>
+                <h3>VPC (Virtual Private Cloud)</h3>
+                <pre><code># Create VPC
+aws ec2 create-vpc --cidr-block 10.0.0.0/16
+
+# Create subnet
+aws ec2 create-subnet \
+    --vpc-id vpc-12345678 \
+    --cidr-block 10.0.1.0/24 \
+    --availability-zone us-west-2a
+
+# Create Internet Gateway
+aws ec2 create-internet-gateway
+aws ec2 attach-internet-gateway \
+    --vpc-id vpc-12345678 \
+    --internet-gateway-id igw-12345678</code></pre>
+                
+                <h3>Security Groups</h3>
+                <pre><code># Create security group
+aws ec2 create-security-group \
+    --group-name web-servers \
+    --description "Security group for web servers" \
+    --vpc-id vpc-12345678
+
+# Add inbound rule
+aws ec2 authorize-security-group-ingress \
+    --group-id sg-903004f8 \
+    --protocol tcp \
+    --port 80 \
+    --cidr 0.0.0.0/0</code></pre>
+                
+                <h2>Database Services</h2>
+                <h3>RDS (Relational Database Service)</h3>
+                <pre><code># Create RDS instance
+aws rds create-db-instance \
+    --db-instance-identifier mydb \
+    --db-instance-class db.t3.micro \
+    --engine mysql \
+    --master-username admin \
+    --master-user-password mypassword \
+    --allocated-storage 20</code></pre>
+                
+                <h2>Container Services</h2>
+                <h3>ECS (Elastic Container Service)</h3>
+                <pre><code># ECS Task Definition
+{
+  "family": "web-app",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "256",
+  "memory": "512",
+  "containerDefinitions": [
+    {
+      "name": "web",
+      "image": "nginx:latest",
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "protocol": "tcp"
+        }
+      ]
+    }
+  ]
+}</code></pre>
+                
+                <h3>ECR (Elastic Container Registry)</h3>
+                <pre><code># Push Docker image to ECR
+aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 123456789012.dkr.ecr.us-west-2.amazonaws.com
+
+docker build -t my-app .
+docker tag my-app:latest 123456789012.dkr.ecr.us-west-2.amazonaws.com/my-app:latest
+docker push 123456789012.dkr.ecr.us-west-2.amazonaws.com/my-app:latest</code></pre>
+                
+                <h2>Monitoring and Logging</h2>
+                <h3>CloudWatch</h3>
+                <pre><code># Create CloudWatch alarm
+aws cloudwatch put-metric-alarm \
+    --alarm-name cpu-mon \
+    --alarm-description "Alarm when CPU exceeds 70%" \
+    --metric-name CPUUtilization \
+    --namespace AWS/EC2 \
+    --statistic Average \
+    --period 300 \
+    --threshold 70.0 \
+    --comparison-operator GreaterThanThreshold</code></pre>
+                
+                <h3>CloudTrail</h3>
+                <p>Audit trail for AWS API calls:</p>
+                <pre><code># Create CloudTrail
+aws cloudtrail create-trail \
+    --name my-trail \
+    --s3-bucket-name my-cloudtrail-bucket</code></pre>
+                
+                <h2>Identity and Access Management (IAM)</h2>
+                <h3>IAM Policies</h3>
+                <pre><code>{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject"
+      ],
+      "Resource": "arn:aws:s3:::my-bucket/*"
+    }
+  ]
+}</code></pre>
+                
+                <h3>IAM Roles</h3>
+                <pre><code># Create IAM role for EC2
+aws iam create-role \
+    --role-name EC2-S3-Access \
+    --assume-role-policy-document file://trust-policy.json
+
+aws iam attach-role-policy \
+    --role-name EC2-S3-Access \
+    --policy-arn arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess</code></pre>
+                
+                <h2>Infrastructure as Code</h2>
+                <h3>CloudFormation Template</h3>
+                <pre><code>AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  MyVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsHostnames: true
+      EnableDnsSupport: true
+      
+  MySubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref MyVPC
+      CidrBlock: 10.0.1.0/24
+      AvailabilityZone: !Select [0, !GetAZs '']</code></pre>
+                
+                <h2>DevOps Tools Integration</h2>
+                <h3>CodeCommit (Git Repository)</h3>
+                <pre><code># Clone CodeCommit repository
+git clone https://git-codecommit.us-west-2.amazonaws.com/v1/repos/my-repo</code></pre>
+                
+                <h3>CodeBuild (Build Service)</h3>
+                <pre><code># buildspec.yml
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+  build:
+    commands:
+      - echo Build started on `date`
+      - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
+      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+  post_build:
+    commands:
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG</code></pre>
+                
+                <h2>Cost Optimization</h2>
+                <ul>
+                    <li>Use appropriate instance types and sizes</li>
+                    <li>Implement auto-scaling</li>
+                    <li>Use Reserved Instances for predictable workloads</li>
+                    <li>Monitor and optimize storage usage</li>
+                    <li>Set up billing alerts</li>
+                    <li>Use AWS Cost Explorer for analysis</li>
+                </ul>
+                
+                <h2>Security Best Practices</h2>
+                <ul>
+                    <li>Enable MFA for all users</li>
+                    <li>Use IAM roles instead of access keys</li>
+                    <li>Encrypt data at rest and in transit</li>
+                    <li>Regularly rotate credentials</li>
+                    <li>Monitor with CloudTrail and GuardDuty</li>
+                    <li>Follow principle of least privilege</li>
+                </ul>
+                
+                <h2>Conclusion</h2>
+                <p>AWS provides a comprehensive platform for DevOps practices. Start with core services like EC2, S3, and VPC, then gradually explore advanced services like ECS, Lambda, and managed databases. Focus on automation, monitoring, and security from the beginning.</p>
+            </div>
+        </article>
+    </div>
+</body>
+</html>
