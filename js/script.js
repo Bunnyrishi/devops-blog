@@ -185,6 +185,7 @@ const blogPosts = [
 // Load blog posts on page load
 document.addEventListener('DOMContentLoaded', function() {
     loadBlogPosts();
+    initCategoryFilters();
 });
 
 function loadBlogPosts() {
@@ -193,36 +194,45 @@ function loadBlogPosts() {
 
     blogGrid.innerHTML = '';
     
-    // Group posts by level
-    const groupedPosts = {
-        beginner: blogPosts.filter(post => post.level === 'Beginner'),
-        intermediate: blogPosts.filter(post => post.level === 'Intermediate'),
-        advanced: blogPosts.filter(post => post.level === 'Advanced')
-    };
-    
-    // Create sections for each level
-    createCategorySection(blogGrid, 'beginner', '🌱 Beginner Level', 'Perfect for those starting their DevOps journey. Learn fundamental concepts and basic commands.', groupedPosts.beginner);
-    createCategorySection(blogGrid, 'intermediate', '🚀 Intermediate Level', 'Ready to dive deeper? Explore advanced tools, best practices, and real-world implementations.', groupedPosts.intermediate);
-    createCategorySection(blogGrid, 'advanced', '⚡ Advanced Level', 'Master complex architectures, enterprise patterns, and cutting-edge DevOps technologies.', groupedPosts.advanced);
+    // Load all posts initially
+    blogPosts.forEach(post => {
+        const blogCard = createBlogCard(post);
+        blogGrid.appendChild(blogCard);
+    });
 }
 
-function createCategorySection(container, categoryId, title, description, posts) {
-    if (posts.length === 0) return;
+function initCategoryFilters() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
     
-    const section = document.createElement('div');
-    section.className = 'category-section';
-    section.innerHTML = `
-        <h3 class="category-title">${title}</h3>
-        <p class="category-description">${description}</p>
-        <div class="blog-grid category-grid" id="${categoryId}-grid"></div>
-    `;
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove active class from all buttons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to clicked button
+            this.classList.add('active');
+            
+            // Filter posts
+            const category = this.getAttribute('data-category');
+            filterPosts(category);
+        });
+    });
+}
+
+function filterPosts(category) {
+    const blogCards = document.querySelectorAll('.blog-card');
     
-    container.appendChild(section);
-    
-    const categoryGrid = section.querySelector(`#${categoryId}-grid`);
-    posts.forEach(post => {
-        const blogCard = createBlogCard(post);
-        categoryGrid.appendChild(blogCard);
+    blogCards.forEach(card => {
+        if (category === 'all') {
+            card.classList.remove('hidden');
+        } else {
+            const cardLevel = card.querySelector('.blog-level').textContent.toLowerCase();
+            if (cardLevel === category) {
+                card.classList.remove('hidden');
+            } else {
+                card.classList.add('hidden');
+            }
+        }
     });
 }
 
@@ -232,6 +242,7 @@ function createBlogCard(post) {
     card.onclick = () => openBlogPost(post.filename);
     
     const levelClass = post.level.toLowerCase();
+    card.setAttribute('data-category', levelClass);
     
     card.innerHTML = `
         <div class="blog-card-header">
