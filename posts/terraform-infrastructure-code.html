@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infrastructure as Code with Terraform</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="blog-post">
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i> Back to Blog
+        </a>
+        
+        <article>
+            <header class="blog-post-header">
+                <h1 class="blog-post-title">Infrastructure as Code with Terraform</h1>
+                <div class="blog-post-meta">
+                    <span><i class="fas fa-calendar"></i> January 9, 2025</span>
+                    <span><i class="fas fa-clock"></i> 16 min read</span>
+                    <span><i class="fas fa-tag"></i> Intermediate</span>
+                </div>
+            </header>
+            
+            <div class="blog-post-content">
+                <h2>What is Terraform?</h2>
+                <p>Terraform is an Infrastructure as Code (IaC) tool that allows you to define and provision infrastructure using declarative configuration files. It supports multiple cloud providers and on-premises infrastructure.</p>
+                
+                <h2>Core Terraform Concepts</h2>
+                <h3>Providers</h3>
+                <p>Plugins that interact with APIs of cloud providers:</p>
+                <pre><code>terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+}
+
+provider "aws" {
+  region = "us-west-2"
+}</code></pre>
+                
+                <h3>Resources</h3>
+                <p>Infrastructure components you want to create:</p>
+                <pre><code>resource "aws_instance" "web" {
+  ami           = "ami-0c02fb55956c7d316"
+  instance_type = "t3.micro"
+  
+  tags = {
+    Name = "WebServer"
+  }
+}</code></pre>
+                
+                <h2>Basic Terraform Workflow</h2>
+                <pre><code># Initialize Terraform
+terraform init
+
+# Plan changes
+terraform plan
+
+# Apply changes
+terraform apply
+
+# Destroy infrastructure
+terraform destroy</code></pre>
+                
+                <h2>Variables and Outputs</h2>
+                <h3>Variables</h3>
+                <pre><code># variables.tf
+variable "instance_type" {
+  description = "EC2 instance type"
+  type        = string
+  default     = "t3.micro"
+}
+
+variable "environment" {
+  description = "Environment name"
+  type        = string
+}
+
+# Using variables
+resource "aws_instance" "web" {
+  ami           = "ami-0c02fb55956c7d316"
+  instance_type = var.instance_type
+  
+  tags = {
+    Name        = "WebServer"
+    Environment = var.environment
+  }
+}</code></pre>
+                
+                <h3>Outputs</h3>
+                <pre><code># outputs.tf
+output "instance_ip" {
+  description = "Public IP of the instance"
+  value       = aws_instance.web.public_ip
+}
+
+output "instance_dns" {
+  description = "Public DNS of the instance"
+  value       = aws_instance.web.public_dns
+}</code></pre>
+                
+                <h2>State Management</h2>
+                <h3>Remote State</h3>
+                <pre><code>terraform {
+  backend "s3" {
+    bucket = "my-terraform-state"
+    key    = "prod/terraform.tfstate"
+    region = "us-west-2"
+    
+    dynamodb_table = "terraform-locks"
+    encrypt        = true
+  }
+}</code></pre>
+                
+                <h2>Modules</h2>
+                <h3>Creating a Module</h3>
+                <pre><code># modules/vpc/main.tf
+resource "aws_vpc" "main" {
+  cidr_block           = var.cidr_block
+  enable_dns_hostnames = true
+  enable_dns_support   = true
+  
+  tags = {
+    Name = var.name
+  }
+}
+
+resource "aws_subnet" "public" {
+  count = length(var.public_subnets)
+  
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = var.public_subnets[count.index]
+  availability_zone       = var.availability_zones[count.index]
+  map_public_ip_on_launch = true
+  
+  tags = {
+    Name = "${var.name}-public-${count.index + 1}"
+  }
+}</code></pre>
+                
+                <h3>Using a Module</h3>
+                <pre><code>module "vpc" {
+  source = "./modules/vpc"
+  
+  name               = "production"
+  cidr_block         = "10.0.0.0/16"
+  availability_zones = ["us-west-2a", "us-west-2b"]
+  public_subnets     = ["10.0.1.0/24", "10.0.2.0/24"]
+}</code></pre>
+                
+                <h2>Data Sources</h2>
+                <pre><code># Get latest Amazon Linux AMI
+data "aws_ami" "amazon_linux" {
+  most_recent = true
+  owners      = ["amazon"]
+  
+  filter {
+    name   = "name"
+    values = ["amzn2-ami-hvm-*-x86_64-gp2"]
+  }
+}
+
+resource "aws_instance" "web" {
+  ami           = data.aws_ami.amazon_linux.id
+  instance_type = "t3.micro"
+}</code></pre>
+                
+                <h2>Provisioners</h2>
+                <pre><code>resource "aws_instance" "web" {
+  ami           = "ami-0c02fb55956c7d316"
+  instance_type = "t3.micro"
+  key_name      = "my-key"
+  
+  provisioner "remote-exec" {
+    inline = [
+      "sudo yum update -y",
+      "sudo yum install -y httpd",
+      "sudo systemctl start httpd",
+      "sudo systemctl enable httpd"
+    ]
+    
+    connection {
+      type        = "ssh"
+      user        = "ec2-user"
+      private_key = file("~/.ssh/my-key.pem")
+      host        = self.public_ip
+    }
+  }
+}</code></pre>
+                
+                <h2>Conditional Resources</h2>
+                <pre><code>resource "aws_instance" "web" {
+  count = var.create_instance ? 1 : 0
+  
+  ami           = "ami-0c02fb55956c7d316"
+  instance_type = "t3.micro"
+}
+
+resource "aws_eip" "web" {
+  count = var.environment == "production" ? 1 : 0
+  
+  instance = aws_instance.web[0].id
+  domain   = "vpc"
+}</code></pre>
+                
+                <h2>Loops and Dynamic Blocks</h2>
+                <pre><code># For each
+resource "aws_instance" "web" {
+  for_each = var.instances
+  
+  ami           = each.value.ami
+  instance_type = each.value.type
+  
+  tags = {
+    Name = each.key
+  }
+}
+
+# Dynamic blocks
+resource "aws_security_group" "web" {
+  name = "web-sg"
+  
+  dynamic "ingress" {
+    for_each = var.ingress_rules
+    content {
+      from_port   = ingress.value.from_port
+      to_port     = ingress.value.to_port
+      protocol    = ingress.value.protocol
+      cidr_blocks = ingress.value.cidr_blocks
+    }
+  }
+}</code></pre>
+                
+                <h2>Workspace Management</h2>
+                <pre><code># Create workspace
+terraform workspace new production
+terraform workspace new staging
+
+# List workspaces
+terraform workspace list
+
+# Switch workspace
+terraform workspace select production
+
+# Use workspace in configuration
+resource "aws_instance" "web" {
+  ami           = "ami-0c02fb55956c7d316"
+  instance_type = terraform.workspace == "production" ? "t3.large" : "t3.micro"
+  
+  tags = {
+    Name        = "web-${terraform.workspace}"
+    Environment = terraform.workspace
+  }
+}</code></pre>
+                
+                <h2>Best Practices</h2>
+                <ul>
+                    <li>Use remote state storage</li>
+                    <li>Enable state locking</li>
+                    <li>Use modules for reusability</li>
+                    <li>Follow naming conventions</li>
+                    <li>Use variables for flexibility</li>
+                    <li>Tag all resources consistently</li>
+                    <li>Use data sources when possible</li>
+                    <li>Implement proper access controls</li>
+                </ul>
+                
+                <h2>Security Considerations</h2>
+                <pre><code># Use sensitive variables
+variable "db_password" {
+  description = "Database password"
+  type        = string
+  sensitive   = true
+}
+
+# Encrypt state
+terraform {
+  backend "s3" {
+    bucket     = "my-terraform-state"
+    key        = "terraform.tfstate"
+    region     = "us-west-2"
+    encrypt    = true
+    kms_key_id = "arn:aws:kms:us-west-2:123456789012:key/12345678-1234-1234-1234-123456789012"
+  }
+}</code></pre>
+                
+                <h2>Conclusion</h2>
+                <p>Terraform enables infrastructure automation through code, providing consistency, version control, and repeatability. Start with simple resources and gradually adopt advanced features like modules, workspaces, and remote state management for production environments.</p>
+            </div>
+        </article>
+    </div>
+</body>
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoring and Logging with Prometheus & Grafana</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="blog-post">
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i> Back to Blog
+        </a>
+        
+        <article>
+            <header class="blog-post-header">
+                <h1 class="blog-post-title">Monitoring and Logging with Prometheus & Grafana</h1>
+                <div class="blog-post-meta">
+                    <span><i class="fas fa-calendar"></i> January 7, 2025</span>
+                    <span><i class="fas fa-clock"></i> 17 min read</span>
+                    <span><i class="fas fa-tag"></i> Intermediate</span>
+                </div>
+            </header>
+            
+            <div class="blog-post-content">
+                <h2>Introduction to Monitoring Stack</h2>
+                <p>Prometheus and Grafana form a powerful monitoring solution. Prometheus collects and stores metrics, while Grafana provides visualization and alerting capabilities.</p>
+                
+                <h2>Prometheus Setup</h2>
+                <h3>Docker Compose Setup</h3>
+                <pre><code>version: '3.8'
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+
+volumes:
+  prometheus_data:</code></pre>
+                
+                <h3>Prometheus Configuration</h3>
+                <pre><code># prometheus.yml
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  - "alert_rules.yml"
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          - alertmanager:9093
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['node-exporter:9100']
+
+  - job_name: 'application'
+    static_configs:
+      - targets: ['app:8080']</code></pre>
+                
+                <h2>Grafana Setup</h2>
+                <pre><code># Add to docker-compose.yml
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin123
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+
+volumes:
+  grafana_data:</code></pre>
+                
+                <h2>Application Metrics</h2>
+                <h3>Node.js Application</h3>
+                <pre><code>const express = require('express');
+const client = require('prom-client');
+
+const app = express();
+
+// Create a Registry
+const register = new client.Registry();
+
+// Add default metrics
+client.collectDefaultMetrics({ register });
+
+// Custom metrics
+const httpRequestDuration = new client.Histogram({
+  name: 'http_request_duration_seconds',
+  help: 'Duration of HTTP requests in seconds',
+  labelNames: ['method', 'route', 'status_code'],
+  buckets: [0.1, 0.5, 1, 2, 5]
+});
+
+const httpRequestsTotal = new client.Counter({
+  name: 'http_requests_total',
+  help: 'Total number of HTTP requests',
+  labelNames: ['method', 'route', 'status_code']
+});
+
+register.registerMetric(httpRequestDuration);
+register.registerMetric(httpRequestsTotal);
+
+// Middleware to collect metrics
+app.use((req, res, next) => {
+  const start = Date.now();
+  
+  res.on('finish', () => {
+    const duration = (Date.now() - start) / 1000;
+    const labels = {
+      method: req.method,
+      route: req.route?.path || req.path,
+      status_code: res.statusCode
+    };
+    
+    httpRequestDuration.observe(labels, duration);
+    httpRequestsTotal.inc(labels);
+  });
+  
+  next();
+});
+
+// Metrics endpoint
+app.get('/metrics', async (req, res) => {
+  res.set('Content-Type', register.contentType);
+  res.end(await register.metrics());
+});
+
+app.listen(8080);</code></pre>
+                
+                <h2>Alert Rules</h2>
+                <pre><code># alert_rules.yml
+groups:
+  - name: application_alerts
+    rules:
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{status_code=~"5.."}[5m]) > 0.1
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "High error rate detected"
+          description: "Error rate is {{ $value }} errors per second"
+
+      - alert: HighResponseTime
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 2
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High response time"
+          description: "95th percentile response time is {{ $value }}s"
+
+      - alert: InstanceDown
+        expr: up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Instance {{ $labels.instance }} down"</code></pre>
+                
+                <h2>Alertmanager Configuration</h2>
+                <pre><code># alertmanager.yml
+global:
+  smtp_smarthost: 'localhost:587'
+  smtp_from: 'alerts@company.com'
+
+route:
+  group_by: ['alertname']
+  group_wait: 10s
+  group_interval: 10s
+  repeat_interval: 1h
+  receiver: 'web.hook'
+
+receivers:
+  - name: 'web.hook'
+    email_configs:
+      - to: 'admin@company.com'
+        subject: 'Alert: {{ .GroupLabels.alertname }}'
+        body: |
+          {{ range .Alerts }}
+          Alert: {{ .Annotations.summary }}
+          Description: {{ .Annotations.description }}
+          {{ end }}
+    
+    slack_configs:
+      - api_url: 'YOUR_SLACK_WEBHOOK_URL'
+        channel: '#alerts'
+        title: 'Alert: {{ .GroupLabels.alertname }}'
+        text: '{{ range .Alerts }}{{ .Annotations.description }}{{ end }}'</code></pre>
+                
+                <h2>Grafana Dashboard</h2>
+                <h3>Dashboard JSON</h3>
+                <pre><code>{
+  "dashboard": {
+    "title": "Application Metrics",
+    "panels": [
+      {
+        "title": "Request Rate",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(http_requests_total[5m])",
+            "legendFormat": "{{ method }} {{ route }}"
+          }
+        ]
+      },
+      {
+        "title": "Response Time",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))",
+            "legendFormat": "95th percentile"
+          }
+        ]
+      },
+      {
+        "title": "Error Rate",
+        "type": "singlestat",
+        "targets": [
+          {
+            "expr": "rate(http_requests_total{status_code=~\"5..\"}[5m])"
+          }
+        ]
+      }
+    ]
+  }
+}</code></pre>
+                
+                <h2>Kubernetes Monitoring</h2>
+                <h3>ServiceMonitor</h3>
+                <pre><code>apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: app-metrics
+spec:
+  selector:
+    matchLabels:
+      app: myapp
+  endpoints:
+  - port: metrics
+    path: /metrics
+    interval: 30s</code></pre>
+                
+                <h2>Log Aggregation with Loki</h2>
+                <pre><code># Add to docker-compose.yml
+  loki:
+    image: grafana/loki:latest
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./loki-config.yml:/etc/loki/local-config.yaml
+    command: -config.file=/etc/loki/local-config.yaml
+
+  promtail:
+    image: grafana/promtail:latest
+    volumes:
+      - /var/log:/var/log:ro
+      - ./promtail-config.yml:/etc/promtail/config.yml
+    command: -config.file=/etc/promtail/config.yml</code></pre>
+                
+                <h2>Custom Exporters</h2>
+                <h3>Database Exporter</h3>
+                <pre><code>const client = require('prom-client');
+const mysql = require('mysql2/promise');
+
+const dbConnectionsGauge = new client.Gauge({
+  name: 'mysql_connections_active',
+  help: 'Number of active MySQL connections'
+});
+
+const dbQueriesCounter = new client.Counter({
+  name: 'mysql_queries_total',
+  help: 'Total number of MySQL queries',
+  labelNames: ['type']
+});
+
+async function collectMetrics() {
+  const connection = await mysql.createConnection({
+    host: 'localhost',
+    user: 'monitor',
+    password: 'password'
+  });
+  
+  const [rows] = await connection.execute('SHOW STATUS LIKE "Threads_connected"');
+  dbConnectionsGauge.set(parseInt(rows[0].Value));
+  
+  await connection.end();
+}
+
+setInterval(collectMetrics, 30000);</code></pre>
+                
+                <h2>Best Practices</h2>
+                <ul>
+                    <li>Use appropriate metric types (counter, gauge, histogram)</li>
+                    <li>Keep cardinality low to avoid performance issues</li>
+                    <li>Use meaningful metric and label names</li>
+                    <li>Set up proper retention policies</li>
+                    <li>Implement gradual alerting (warning → critical)</li>
+                    <li>Use recording rules for complex queries</li>
+                    <li>Monitor the monitoring system itself</li>
+                    <li>Implement proper backup strategies</li>
+                </ul>
+                
+                <h2>Conclusion</h2>
+                <p>Prometheus and Grafana provide comprehensive monitoring capabilities for modern applications. Implement proper metrics collection, create meaningful dashboards, and set up effective alerting to maintain system reliability and performance.</p>
+            </div>
+        </article>
+    </div>
+</body>
+</html>
