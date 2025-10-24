@@ -394,14 +394,7 @@ body {
     color: #444;
 }
 
-.blog-post-content h2 {
-    color: #667eea;
-    margin: 3rem 0 1.5rem;
-    font-size: 2rem;
-    font-weight: 600;
-    position: relative;
-    padding-bottom: 0.5rem;
-}
+
 
 .blog-post-content h2::after {
     content: '';
@@ -424,6 +417,29 @@ body {
     background: #f8f9ff;
     padding: 0.8rem 1rem;
     border-radius: 0 8px 8px 0;
+    line-height: 1.6;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.blog-post-content h3:has-emoji {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.blog-post-content h2 {
+    color: #667eea;
+    margin: 3rem 0 1.5rem;
+    font-size: 2rem;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 0.5rem;
+    line-height: 1.4;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .blog-post-content p {
@@ -569,6 +585,36 @@ body {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
     background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+/* Emoji spacing fixes */
+.blog-post-content h2:first-child,
+.blog-post-content h3:first-child {
+    margin-top: 1rem;
+}
+
+.blog-post-content h2 > *:first-child,
+.blog-post-content h3 > *:first-child {
+    margin-right: 0.5rem;
+}
+
+/* Fix emoji rendering */
+.blog-post-content h2,
+.blog-post-content h3 {
+    word-spacing: 0.2em;
+    letter-spacing: 0.02em;
+}
+
+.blog-post-content h2 span,
+.blog-post-content h3 span {
+    display: inline-block;
+    margin-right: 0.5rem;
+}
+
+/* Prevent text overflow */
+.blog-post-content {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 /* Responsive */
