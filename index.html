@@ -3,78 +3,386 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevOps Mastery Blog | Rishi Gupta</title>
-    <meta name="description" content="Professional DevOps blog covering AWS, Docker, Kubernetes, CI/CD, and cloud automation from beginner to advanced levels.">
-    <link rel="stylesheet" href="css/style.css">
+    <title>DevOps Mastery Blog | Rishi Gupta - CI/CD, Docker, Kubernetes, AWS</title>
+    <meta name="description" content="Professional DevOps blog covering AWS, Azure, Docker, Kubernetes, CI/CD, Terraform, and cloud automation from beginner to advanced levels.">
+    <meta name="keywords" content="DevOps, CI/CD, Docker, Kubernetes, AWS, Azure, Terraform, Jenkins, Ansible, Cloud Computing">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+        .dropdown-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .dropdown-content.active { max-height: 2000px; }
+        .code-block { background: #1e293b; color: #e2e8f0; }
+        .dark .bg-white { background-color: #1f2937; }
+        .dark .text-gray-900 { color: #f9fafb; }
+        .dark .text-gray-600 { color: #d1d5db; }
+        .dark .bg-gray-50 { background-color: #374151; }
+    </style>
 </head>
-<body>
-    <header class="header">
-        <nav class="navbar">
-            <div class="nav-brand">
-                <h1><i class="fas fa-code"></i> DevOps Mastery</h1>
-                <p>by Rishi Gupta</p>
+<body class="bg-gray-50 transition-colors duration-300">
+    <!-- Header -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-rocket text-2xl text-blue-600"></i>
+                    <div>
+                        <h1 class="text-xl font-bold text-gray-900">DevOps Mastery</h1>
+                        <p class="text-sm text-gray-600">by Rishi Gupta</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="https://bunnyrishi.github.io" class="text-gray-600 hover:text-blue-600 transition-colors">Portfolio</a>
+                    <button id="themeToggle" class="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
             </div>
-            <ul class="nav-menu">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#blogs">Blogs</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="https://bunnyrishi.github.io" target="_blank">Portfolio</a></li>
-            </ul>
         </nav>
     </header>
 
-    <main>
-        <section id="home" class="hero">
-            <div class="hero-content">
-                <h1>Master DevOps from Scratch to Advanced</h1>
-                <p>Comprehensive guides on AWS, Docker, Kubernetes, CI/CD, and cloud automation</p>
-                <a href="#blogs" class="cta-button">Start Learning</a>
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-20">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-5xl font-bold mb-6">Master DevOps Engineering</h1>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">From beginner basics to advanced automation - comprehensive guides on AWS, Docker, Kubernetes, CI/CD, and cloud infrastructure</p>
+            <div class="flex justify-center space-x-4">
+                <span class="bg-white/20 px-4 py-2 rounded-full text-sm">🚀 CI/CD</span>
+                <span class="bg-white/20 px-4 py-2 rounded-full text-sm">☁️ Cloud</span>
+                <span class="bg-white/20 px-4 py-2 rounded-full text-sm">🐳 Docker</span>
+                <span class="bg-white/20 px-4 py-2 rounded-full text-sm">⚙️ Kubernetes</span>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="blogs" class="blog-section">
-            <div class="container">
-                <h2>Latest DevOps Articles</h2>
-                
-                <!-- Category Filter Buttons -->
-                <div class="category-filters">
-                    <button class="filter-btn active" data-category="all">📚 All Posts</button>
-                    <button class="filter-btn" data-category="beginner">🌱 Beginner</button>
-                    <button class="filter-btn" data-category="intermediate">🚀 Intermediate</button>
-                    <button class="filter-btn" data-category="advanced">⚡ Advanced</button>
-                </div>
-                
-                <div class="blog-grid" id="blogGrid">
-                    <!-- Blog posts will be loaded here -->
-                </div>
+    <!-- Featured Blog Banner -->
+    <section class="bg-yellow-50 border-l-4 border-yellow-400 p-6 mx-6 mt-8 rounded-r-lg">
+        <div class="flex items-center">
+            <i class="fas fa-star text-yellow-500 text-xl mr-3"></i>
+            <div>
+                <h3 class="font-semibold text-gray-900">Featured: Complete CI/CD Pipeline with Jenkins & Docker</h3>
+                <p class="text-gray-600">Learn to build production-ready pipelines from scratch</p>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="about" class="about-section">
-            <div class="container">
-                <h2>About the Author</h2>
-                <div class="author-info">
-                    <div class="author-text">
-                        <h3>Rishi Gupta</h3>
-                        <p>DevOps Engineer with 3+ years of experience in cloud infrastructure, CI/CD automation, and containerization. Passionate about sharing knowledge and helping others master DevOps practices.</p>
-                        <div class="social-links">
-                            <a href="https://www.linkedin.com/in/devopsrishi" target="_blank"><i class="fab fa-linkedin"></i></a>
-                            <a href="https://github.com/Bunnyrishi" target="_blank"><i class="fab fa-github"></i></a>
-                            <a href="mailto:rishigupta1999.rg@gmail.com"><i class="fas fa-envelope"></i></a>
-                        </div>
+    <!-- Search Bar -->
+    <section class="container mx-auto px-6 py-8">
+        <div class="max-w-md mx-auto">
+            <div class="relative">
+                <input type="text" id="searchInput" placeholder="Search blogs by title or keyword..." 
+                       class="w-full px-4 py-3 pl-10 pr-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 pb-12">
+        <!-- Beginner Section -->
+        <div class="mb-8">
+            <button class="dropdown-btn w-full bg-green-500 hover:bg-green-600 text-white p-4 rounded-lg flex justify-between items-center transition-colors" data-target="beginner">
+                <span class="text-xl font-semibold">🟢 Beginner Level - DevOps Fundamentals</span>
+                <i class="fas fa-chevron-down transform transition-transform"></i>
+            </button>
+            <div id="beginner" class="dropdown-content bg-white rounded-b-lg shadow-lg">
+                <div class="p-6 grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="beginnerCards"></div>
+            </div>
+        </div>
+
+        <!-- Intermediate Section -->
+        <div class="mb-8">
+            <button class="dropdown-btn w-full bg-orange-500 hover:bg-orange-600 text-white p-4 rounded-lg flex justify-between items-center transition-colors" data-target="intermediate">
+                <span class="text-xl font-semibold">🟠 Intermediate Level - Advanced Practices</span>
+                <i class="fas fa-chevron-down transform transition-transform"></i>
+            </button>
+            <div id="intermediate" class="dropdown-content bg-white rounded-b-lg shadow-lg">
+                <div class="p-6 grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="intermediateCards"></div>
+            </div>
+        </div>
+
+        <!-- Advanced Section -->
+        <div class="mb-8">
+            <button class="dropdown-btn w-full bg-red-500 hover:bg-red-600 text-white p-4 rounded-lg flex justify-between items-center transition-colors" data-target="advanced">
+                <span class="text-xl font-semibold">🔴 Advanced Level - Enterprise Solutions</span>
+                <i class="fas fa-chevron-down transform transition-transform"></i>
+            </button>
+            <div id="advanced" class="dropdown-content bg-white rounded-b-lg shadow-lg">
+                <div class="p-6 grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="advancedCards"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">DevOps Mastery</h3>
+                    <p class="text-gray-400">Empowering developers with practical DevOps knowledge and real-world solutions.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">All Tutorials</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">AWS Guides</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Docker Tutorials</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Kubernetes</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="https://github.com/Bunnyrishi" class="text-gray-400 hover:text-white transition-colors text-xl"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/devopsrishi" class="text-gray-400 hover:text-white transition-colors text-xl"><i class="fab fa-linkedin"></i></a>
+                        <a href="mailto:rishigupta1999.rg@gmail.com" class="text-gray-400 hover:text-white transition-colors text-xl"><i class="fas fa-envelope"></i></a>
+                        <a href="https://bunnyrishi.github.io" class="text-gray-400 hover:text-white transition-colors text-xl"><i class="fas fa-globe"></i></a>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 DevOps Mastery Blog by Rishi Gupta. All rights reserved.</p>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 DevOps Mastery Blog by Rishi Gupta. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
+    <script>
+        // Blog data for different levels
+        const blogData = {
+            beginner: [
+                {
+                    title: "CI/CD Basics",
+                    description: "Learn the fundamentals of Continuous Integration and Deployment",
+                    image: "https://images.unsplash.com/photo-1618477247222-acbdb0e159b3?w=400",
+                    command: "git clone https://github.com/user/repo.git",
+                    link: "posts/jenkins-cicd-pipeline.html"
+                },
+                {
+                    title: "Docker Essentials",
+                    description: "Container basics and Docker fundamentals for beginners",
+                    image: "https://images.unsplash.com/photo-1605745341112-85968b19335b?w=400",
+                    command: "docker run -p 8080:80 nginx",
+                    link: "posts/docker-fundamentals.html"
+                },
+                {
+                    title: "Kubernetes Overview",
+                    description: "Introduction to container orchestration with Kubernetes",
+                    image: "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=400",
+                    command: "kubectl get pods",
+                    link: "posts/kubernetes-basics.html"
+                },
+                {
+                    title: "Infrastructure as Code",
+                    description: "Getting started with Terraform for infrastructure management",
+                    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400",
+                    command: "terraform init && terraform plan",
+                    link: "posts/terraform-basics.html"
+                },
+                {
+                    title: "Monitoring Basics",
+                    description: "Introduction to application and infrastructure monitoring",
+                    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400",
+                    command: "docker run -p 3000:3000 grafana/grafana",
+                    link: "posts/monitoring-grafana-prometheus.html"
+                },
+                {
+                    title: "Cloud Deployment",
+                    description: "Deploy your first application to AWS and Azure",
+                    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400",
+                    command: "aws s3 cp app.zip s3://my-bucket/",
+                    link: "posts/aws-deployment-guide.html"
+                }
+            ],
+            intermediate: [
+                {
+                    title: "Advanced CI/CD",
+                    description: "Multi-stage pipelines with automated testing and deployment",
+                    image: "https://images.unsplash.com/photo-1618477247222-acbdb0e159b3?w=400",
+                    command: "helm install myapp ./chart --set image.tag=v1.2.3",
+                    link: "posts/jenkins-cicd-pipeline.html"
+                },
+                {
+                    title: "Docker Compose",
+                    description: "Multi-container applications with Docker Compose",
+                    image: "https://images.unsplash.com/photo-1605745341112-85968b19335b?w=400",
+                    command: "docker-compose up -d --scale web=3",
+                    link: "posts/docker-fundamentals.html"
+                },
+                {
+                    title: "Kubernetes Services",
+                    description: "Service mesh, ingress controllers, and networking",
+                    image: "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=400",
+                    command: "kubectl apply -f ingress.yaml",
+                    link: "posts/kubernetes-basics.html"
+                },
+                {
+                    title: "Terraform Modules",
+                    description: "Reusable infrastructure components and best practices",
+                    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400",
+                    command: "terraform apply -var-file=prod.tfvars",
+                    link: "posts/terraform-basics.html"
+                },
+                {
+                    title: "Advanced Monitoring",
+                    description: "Custom metrics, alerting, and observability strategies",
+                    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400",
+                    command: "prometheus --config.file=prometheus.yml",
+                    link: "posts/monitoring-grafana-prometheus.html"
+                },
+                {
+                    title: "Multi-Cloud Strategy",
+                    description: "Deploy and manage applications across AWS and Azure",
+                    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400",
+                    command: "az aks get-credentials --resource-group myRG --name myCluster",
+                    link: "posts/azure-devops-complete-guide.html"
+                }
+            ],
+            advanced: [
+                {
+                    title: "Enterprise CI/CD",
+                    description: "GitOps, security scanning, and compliance automation",
+                    image: "https://images.unsplash.com/photo-1618477247222-acbdb0e159b3?w=400",
+                    command: "az pipelines create --name prod-pipeline --yml azure-pipelines.yml",
+                    link: "posts/jenkins-cicd-pipeline.html"
+                },
+                {
+                    title: "Container Security",
+                    description: "Security scanning, runtime protection, and compliance",
+                    image: "https://images.unsplash.com/photo-1605745341112-85968b19335b?w=400",
+                    command: "trivy image --severity HIGH,CRITICAL nginx:latest",
+                    link: "posts/docker-fundamentals.html"
+                },
+                {
+                    title: "K8s Production",
+                    description: "Production-grade Kubernetes with RBAC and policies",
+                    image: "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=400",
+                    command: "kubectl apply -f network-policy.yaml",
+                    link: "posts/kubernetes-basics.html"
+                },
+                {
+                    title: "Infrastructure Automation",
+                    description: "Advanced Terraform with remote state and workspaces",
+                    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400",
+                    command: "terraform workspace select production",
+                    link: "posts/terraform-basics.html"
+                },
+                {
+                    title: "Observability Platform",
+                    description: "Enterprise monitoring with distributed tracing",
+                    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400",
+                    command: "jaeger-all-in-one --collector.zipkin.host-port=:9411",
+                    link: "posts/monitoring-grafana-prometheus.html"
+                },
+                {
+                    title: "Cloud Architecture",
+                    description: "Design scalable, resilient cloud-native architectures",
+                    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400",
+                    command: "aws configure set region us-west-2 --profile production",
+                    link: "posts/aws-deployment-guide.html"
+                }
+            ]
+        };
+
+        // Create blog cards
+        function createBlogCard(blog) {
+            return `
+                <div class="card-hover bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="${blog.image}" alt="${blog.title}" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-900">${blog.title}</h3>
+                        <p class="text-gray-600 mb-4">${blog.description}</p>
+                        <div class="code-block p-3 rounded text-sm mb-4 font-mono">
+                            <code>${blog.command}</code>
+                        </div>
+                        <a href="${blog.link}" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded transition-colors">
+                            Read More <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Populate cards
+        function populateCards() {
+            Object.keys(blogData).forEach(level => {
+                const container = document.getElementById(`${level}Cards`);
+                container.innerHTML = blogData[level].map(createBlogCard).join('');
+            });
+        }
+
+        // Dropdown functionality
+        function initDropdowns() {
+            document.querySelectorAll('.dropdown-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const target = document.getElementById(btn.dataset.target);
+                    const icon = btn.querySelector('i');
+                    
+                    // Close other dropdowns
+                    document.querySelectorAll('.dropdown-content').forEach(content => {
+                        if (content !== target) {
+                            content.classList.remove('active');
+                            content.previousElementSibling.querySelector('i').style.transform = 'rotate(0deg)';
+                        }
+                    });
+                    
+                    // Toggle current dropdown
+                    target.classList.toggle('active');
+                    icon.style.transform = target.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0deg)';
+                    
+                    // Save state
+                    localStorage.setItem('lastOpenedSection', target.classList.contains('active') ? btn.dataset.target : '');
+                });
+            });
+        }
+
+        // Search functionality
+        function initSearch() {
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase();
+                document.querySelectorAll('.card-hover').forEach(card => {
+                    const title = card.querySelector('h3').textContent.toLowerCase();
+                    const description = card.querySelector('p').textContent.toLowerCase();
+                    card.style.display = (title.includes(query) || description.includes(query)) ? 'block' : 'none';
+                });
+            });
+        }
+
+        // Dark mode toggle
+        function initThemeToggle() {
+            const themeToggle = document.getElementById('themeToggle');
+            const body = document.body;
+            
+            themeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark');
+                const isDark = body.classList.contains('dark');
+                themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            });
+            
+            // Load saved theme
+            if (localStorage.getItem('theme') === 'dark') {
+                body.classList.add('dark');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', () => {
+            populateCards();
+            initDropdowns();
+            initSearch();
+            initThemeToggle();
+            
+            // Restore last opened section
+            const lastSection = localStorage.getItem('lastOpenedSection');
+            if (lastSection) {
+                const btn = document.querySelector(`[data-target="${lastSection}"]`);
+                if (btn) btn.click();
+            }
+        });
+    </script>
 </body>
 </html>
