@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kubernetes Basics - Complete Guide | DevOps Mastery</title>
+    <meta name="description" content="Learn Kubernetes fundamentals including pods, services, deployments, and container orchestration.">
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h1><i class="fas fa-code"></i> DevOps Mastery</h1>
+                <p>by Rishi Gupta</p>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="#content">Content</a></li>
+                <li><a href="https://bunnyrishi.github.io" target="_blank">Portfolio</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="blog-post">
+        <div class="container">
+            <article id="content">
+                <header class="post-header">
+                    <h1>Kubernetes Basics: Complete Guide</h1>
+                    <div class="post-meta">
+                        <span><i class="fas fa-calendar"></i> January 2025</span>
+                        <span><i class="fas fa-clock"></i> 30 min read</span>
+                        <span><i class="fas fa-tag"></i> Orchestration</span>
+                    </div>
+                </header>
+
+                <div class="post-content">
+                    <h2>What is Kubernetes?</h2>
+                    <p>Kubernetes (K8s) is an open-source container orchestration platform that automates the deployment, scaling, and management of containerized applications.</p>
+
+                    <h3>Core Concepts</h3>
+                    <ul>
+                        <li><strong>Pods:</strong> Smallest deployable units</li>
+                        <li><strong>Services:</strong> Network abstraction for pods</li>
+                        <li><strong>Deployments:</strong> Manage pod replicas</li>
+                        <li><strong>ConfigMaps:</strong> Configuration management</li>
+                        <li><strong>Secrets:</strong> Sensitive data management</li>
+                    </ul>
+
+                    <h3>Kubernetes Architecture</h3>
+                    <div class="code-block">
+                        <h4>Control Plane Components:</h4>
+                        <ul>
+                            <li><strong>API Server:</strong> Central management entity</li>
+                            <li><strong>etcd:</strong> Distributed key-value store</li>
+                            <li><strong>Scheduler:</strong> Assigns pods to nodes</li>
+                            <li><strong>Controller Manager:</strong> Manages controllers</li>
+                        </ul>
+                    </div>
+
+                    <h3>Essential kubectl Commands</h3>
+                    <div class="code-block">
+                        <h4>Basic Operations:</h4>
+                        <pre><code># Get cluster info
+kubectl cluster-info
+
+# List nodes
+kubectl get nodes
+
+# List pods
+kubectl get pods
+
+# List services
+kubectl get services
+
+# Describe a pod
+kubectl describe pod <pod-name>
+
+# Get pod logs
+kubectl logs <pod-name>
+
+# Execute command in pod
+kubectl exec -it <pod-name> -- /bin/bash</code></pre>
+                    </div>
+
+                    <h3>Creating Your First Pod</h3>
+                    <div class="code-block">
+                        <h4>Simple Pod YAML:</h4>
+                        <pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+  labels:
+    app: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx:latest
+    ports:
+    - containerPort: 80</code></pre>
+                    </div>
+
+                    <h3>Deployments</h3>
+                    <p>Deployments provide declarative updates for pods and replica sets:</p>
+                    <div class="code-block">
+                        <h4>Deployment YAML:</h4>
+                        <pre><code>apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80</code></pre>
+                    </div>
+
+                    <h3>Services</h3>
+                    <p>Services expose pods to network traffic:</p>
+                    <div class="code-block">
+                        <h4>Service YAML:</h4>
+                        <pre><code>apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    app: nginx
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: LoadBalancer</code></pre>
+                    </div>
+
+                    <h3>Common kubectl Operations</h3>
+                    <div class="code-block">
+                        <h4>Deployment Management:</h4>
+                        <pre><code># Apply configuration
+kubectl apply -f deployment.yaml
+
+# Scale deployment
+kubectl scale deployment nginx-deployment --replicas=5
+
+# Update image
+kubectl set image deployment/nginx-deployment nginx=nginx:1.21
+
+# Rollback deployment
+kubectl rollout undo deployment/nginx-deployment
+
+# Check rollout status
+kubectl rollout status deployment/nginx-deployment</code></pre>
+                    </div>
+
+                    <h3>ConfigMaps and Secrets</h3>
+                    <div class="code-block">
+                        <h4>ConfigMap Example:</h4>
+                        <pre><code># Create ConfigMap
+kubectl create configmap app-config --from-literal=database_url=mongodb://localhost:27017
+
+# Use in Pod
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-pod
+spec:
+  containers:
+  - name: app
+    image: myapp:latest
+    env:
+    - name: DATABASE_URL
+      valueFrom:
+        configMapKeyRef:
+          name: app-config
+          key: database_url</code></pre>
+                    </div>
+
+                    <h3>Best Practices</h3>
+                    <ul>
+                        <li>Use namespaces for organization</li>
+                        <li>Set resource limits and requests</li>
+                        <li>Use health checks (liveness/readiness probes)</li>
+                        <li>Implement proper logging and monitoring</li>
+                        <li>Use secrets for sensitive data</li>
+                        <li>Follow the principle of least privilege</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 DevOps Mastery Blog by Rishi Gupta. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Fundamentals - Complete Guide | DevOps Mastery</title>
+    <meta name="description" content="Master Docker fundamentals with comprehensive tutorials covering containers, images, and deployment strategies.">
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h1><i class="fas fa-code"></i> DevOps Mastery</h1>
+                <p>by Rishi Gupta</p>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="#content">Content</a></li>
+                <li><a href="https://bunnyrishi.github.io" target="_blank">Portfolio</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="blog-post">
+        <div class="container">
+            <article id="content">
+                <header class="post-header">
+                    <h1>Docker Fundamentals: Complete Guide</h1>
+                    <div class="post-meta">
+                        <span><i class="fas fa-calendar"></i> January 2025</span>
+                        <span><i class="fas fa-clock"></i> 25 min read</span>
+                        <span><i class="fas fa-tag"></i> Containerization</span>
+                    </div>
+                </header>
+
+                <div class="post-content">
+                    <h2>What is Docker?</h2>
+                    <p>Docker is a containerization platform that packages applications and their dependencies into lightweight, portable containers. These containers can run consistently across different environments.</p>
+
+                    <h3>Key Benefits</h3>
+                    <ul>
+                        <li><strong>Portability:</strong> Run anywhere - development, testing, production</li>
+                        <li><strong>Consistency:</strong> Same environment across all stages</li>
+                        <li><strong>Efficiency:</strong> Lightweight compared to virtual machines</li>
+                        <li><strong>Scalability:</strong> Easy to scale up or down</li>
+                    </ul>
+
+                    <h3>Docker Architecture</h3>
+                    <div class="code-block">
+                        <h4>Core Components:</h4>
+                        <ul>
+                            <li><strong>Docker Engine:</strong> Runtime that manages containers</li>
+                            <li><strong>Docker Images:</strong> Read-only templates</li>
+                            <li><strong>Docker Containers:</strong> Running instances of images</li>
+                            <li><strong>Dockerfile:</strong> Instructions to build images</li>
+                        </ul>
+                    </div>
+
+                    <h3>Essential Docker Commands</h3>
+                    <div class="code-block">
+                        <h4>Basic Commands:</h4>
+                        <pre><code># Pull an image
+docker pull nginx:latest
+
+# Run a container
+docker run -d -p 8080:80 --name my-nginx nginx
+
+# List running containers
+docker ps
+
+# Stop a container
+docker stop my-nginx
+
+# Remove a container
+docker rm my-nginx
+
+# List images
+docker images
+
+# Remove an image
+docker rmi nginx:latest</code></pre>
+                    </div>
+
+                    <h3>Creating Your First Dockerfile</h3>
+                    <div class="code-block">
+                        <h4>Simple Node.js Application:</h4>
+                        <pre><code># Use official Node.js runtime
+FROM node:18-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies
+RUN npm ci --only=production
+
+# Copy application code
+COPY . .
+
+# Expose port
+EXPOSE 3000
+
+# Define startup command
+CMD ["npm", "start"]</code></pre>
+                    </div>
+
+                    <h3>Docker Compose</h3>
+                    <p>Docker Compose allows you to define and run multi-container applications:</p>
+                    <div class="code-block">
+                        <h4>docker-compose.yml Example:</h4>
+                        <pre><code>version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - database
+  
+  database:
+    image: postgres:14
+    environment:
+      - POSTGRES_DB=myapp
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:</code></pre>
+                    </div>
+
+                    <h3>Best Practices</h3>
+                    <ul>
+                        <li>Use official base images</li>
+                        <li>Keep images small and focused</li>
+                        <li>Use .dockerignore files</li>
+                        <li>Run containers as non-root users</li>
+                        <li>Use multi-stage builds for production</li>
+                        <li>Tag images properly</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 DevOps Mastery Blog by Rishi Gupta. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
