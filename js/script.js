@@ -193,9 +193,36 @@ function loadBlogPosts() {
 
     blogGrid.innerHTML = '';
     
-    blogPosts.forEach(post => {
+    // Group posts by level
+    const groupedPosts = {
+        beginner: blogPosts.filter(post => post.level === 'Beginner'),
+        intermediate: blogPosts.filter(post => post.level === 'Intermediate'),
+        advanced: blogPosts.filter(post => post.level === 'Advanced')
+    };
+    
+    // Create sections for each level
+    createCategorySection(blogGrid, 'beginner', '🌱 Beginner Level', 'Perfect for those starting their DevOps journey. Learn fundamental concepts and basic commands.', groupedPosts.beginner);
+    createCategorySection(blogGrid, 'intermediate', '🚀 Intermediate Level', 'Ready to dive deeper? Explore advanced tools, best practices, and real-world implementations.', groupedPosts.intermediate);
+    createCategorySection(blogGrid, 'advanced', '⚡ Advanced Level', 'Master complex architectures, enterprise patterns, and cutting-edge DevOps technologies.', groupedPosts.advanced);
+}
+
+function createCategorySection(container, categoryId, title, description, posts) {
+    if (posts.length === 0) return;
+    
+    const section = document.createElement('div');
+    section.className = 'category-section';
+    section.innerHTML = `
+        <h3 class="category-title">${title}</h3>
+        <p class="category-description">${description}</p>
+        <div class="blog-grid category-grid" id="${categoryId}-grid"></div>
+    `;
+    
+    container.appendChild(section);
+    
+    const categoryGrid = section.querySelector(`#${categoryId}-grid`);
+    posts.forEach(post => {
         const blogCard = createBlogCard(post);
-        blogGrid.appendChild(blogCard);
+        categoryGrid.appendChild(blogCard);
     });
 }
 
@@ -208,7 +235,7 @@ function createBlogCard(post) {
     
     card.innerHTML = `
         <div class="blog-card-header">
-            <span class="blog-level">${post.level}</span>
+            <span class="blog-level ${levelClass}">${post.level}</span>
             <h3>${post.title}</h3>
         </div>
         <div class="blog-card-body">
