@@ -672,15 +672,9 @@ body {
         margin: 1rem;
     }
     
-    .blog-post-content pre {
-        padding: 1.5rem;
-        padding-top: 2.5rem;
-    }
-    
     .blog-post-content pre::before {
-        position: fixed;
-        width: 100vw;
-        left: 0;
+        width: calc(100% + 4rem);
+        left: -2rem;
         right: auto;
     }
 }
