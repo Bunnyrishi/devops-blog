@@ -19,23 +19,23 @@
                 <div class="blog-post-meta">
                     <span><i class="fas fa-calendar"></i> January 7, 2025</span>
                     <span><i class="fas fa-clock"></i> 17 min read</span>
-                    <span><i class="fas fa-tag"></i> Intermediate</span>
-                </div>
+                    <span><i class="fas fa-tag"></i> Intermediate</span></div>
             </header>
             
             <div class="blog-post-content">
                 <div class="highlight-box">
                     <h2>📊 Introduction to Monitoring Stack</h2>
-                    <p>Prometheus and Grafana form a <strong>powerful monitoring solution</strong>. Prometheus collects and stores metrics, while Grafana provides visualization and alerting capabilities.</p>
-                </div>
+                    <p>Prometheus and Grafana form a <strong>powerful monitoring solution</strong>. Prometheus collects and stores metrics, while Grafana provides visualization and alerting capabilities.</p></div>
                 
-                <blockquote>
-                    "Monitoring is not just about knowing when things break, but understanding how they break and why." - Monitoring Best Practices
-                </blockquote>
+
+<blockquote>
+                    "Monitoring is not just about knowing when things break, but understanding how they break and why." - Monitoring Best Practices</blockquote>
                 
-                <h2>🔧 Prometheus Setup</h2>
+
+<h2>🔧 Prometheus Setup</h2>
                 <h3>Docker Compose Setup</h3>
-                <pre><code>version: '3.8'
+
+<pre><code>version: '3.8'
 services:
   prometheus:
     image: prom/prometheus:latest
@@ -53,8 +53,10 @@ services:
 volumes:
   prometheus_data:</code></pre>
                 
-                <h3>Prometheus Configuration</h3>
-                <pre><code># prometheus.yml
+
+<h3>Prometheus Configuration</h3>
+
+<pre><code># prometheus.yml
 global:
   scrape_interval: 15s
   evaluation_interval: 15s
@@ -81,7 +83,8 @@ scrape_configs:
     static_configs:
       - targets: ['app:8080']</code></pre>
                 
-                <h2>📈 Grafana Setup</h2>
+
+<h2>📈 Grafana Setup</h2>
                 <pre><code># Add to docker-compose.yml
   grafana:
     image: grafana/grafana:latest
@@ -96,9 +99,11 @@ scrape_configs:
 volumes:
   grafana_data:</code></pre>
                 
-                <h2>💻 Application Metrics</h2>
+
+<h2>💻 Application Metrics</h2>
                 <h3>Node.js Application</h3>
-                <pre><code>const express = require('express');
+
+<pre><code>const express = require('express');
 const client = require('prom-client');
 
 const app = express();
@@ -153,7 +158,8 @@ app.get('/metrics', async (req, res) => {
 
 app.listen(8080);</code></pre>
                 
-                <h2>🚨 Alert Rules</h2>
+
+<h2>🚨 Alert Rules</h2>
                 <pre><code># alert_rules.yml
 groups:
   - name: application_alerts
@@ -184,7 +190,8 @@ groups:
         annotations:
           summary: "Instance {{ $labels.instance }} down"</code></pre>
                 
-                <h2>📧 Alertmanager Configuration</h2>
+
+<h2>📧 Alertmanager Configuration</h2>
                 <pre><code># alertmanager.yml
 global:
   smtp_smarthost: 'localhost:587'
@@ -214,9 +221,11 @@ receivers:
         title: 'Alert: {{ .GroupLabels.alertname }}'
         text: '{{ range .Alerts }}{{ .Annotations.description }}{{ end }}'</code></pre>
                 
-                <h2>📊 Grafana Dashboard</h2>
+
+<h2>📊 Grafana Dashboard</h2>
                 <h3>Dashboard JSON</h3>
-                <pre><code>{
+
+<pre><code>{
   "dashboard": {
     "title": "Application Metrics",
     "panels": [
@@ -253,9 +262,11 @@ receivers:
   }
 }</code></pre>
                 
-                <h2>⚙️ Kubernetes Monitoring</h2>
+
+<h2>⚙️ Kubernetes Monitoring</h2>
                 <h3>ServiceMonitor</h3>
-                <pre><code>apiVersion: monitoring.coreos.com/v1
+
+<pre><code>apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: app-metrics
@@ -268,7 +279,8 @@ spec:
     path: /metrics
     interval: 30s</code></pre>
                 
-                <h2>📄 Log Aggregation with Loki</h2>
+
+<h2>📄 Log Aggregation with Loki</h2>
                 <pre><code># Add to docker-compose.yml
   loki:
     image: grafana/loki:latest
@@ -285,9 +297,11 @@ spec:
       - ./promtail-config.yml:/etc/promtail/config.yml
     command: -config.file=/etc/promtail/config.yml</code></pre>
                 
-                <h2>🔌 Custom Exporters</h2>
+
+<h2>🔌 Custom Exporters</h2>
                 <h3>Database Exporter</h3>
-                <pre><code>const client = require('prom-client');
+
+<pre><code>const client = require('prom-client');
 const mysql = require('mysql2/promise');
 
 const dbConnectionsGauge = new client.Gauge({
@@ -316,7 +330,8 @@ async function collectMetrics() {
 
 setInterval(collectMetrics, 30000);</code></pre>
                 
-                <div class="highlight-box">
+
+<div class="highlight-box">
                     <h2>💡 Best Practices</h2>
                     <ul>
                         <li><strong>Metric Types:</strong> Use appropriate metric types (counter, gauge, histogram)</li>
@@ -326,18 +341,15 @@ setInterval(collectMetrics, 30000);</code></pre>
                         <li><strong>Alerting:</strong> Implement gradual alerting (warning → critical)</li>
                         <li><strong>Recording Rules:</strong> Use recording rules for complex queries</li>
                         <li><strong>Self-Monitoring:</strong> Monitor the monitoring system itself</li>
-                        <li><strong>Backup:</strong> Implement proper backup strategies</li>
-                    </ul>
-                </div>
+                        <li><strong>Backup:</strong> Implement proper backup strategies</li></ul></div>
                 
-                <h2>🎯 Conclusion</h2>
+
+<h2>🎯 Conclusion</h2>
                 <p>Prometheus and Grafana provide <strong>comprehensive monitoring capabilities</strong> for modern applications.</p>
                 
-                <div class="info-box">
-                    <p><strong>Success Strategy:</strong> Implement proper metrics collection, create meaningful dashboards, and set up effective alerting to maintain system reliability and performance.</p>
-                </div>
-            </div>
-        </article>
-    </div>
+
+<div class="info-box">
+                    <p><strong>Success Strategy:</strong> Implement proper metrics collection, create meaningful dashboards, and set up effective alerting to maintain system reliability and performance.</p></div></div>
+        </article></div>
 </body>
 </html>

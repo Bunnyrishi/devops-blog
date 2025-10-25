@@ -19,17 +19,18 @@
                 <div class="blog-post-meta">
                     <span><i class="fas fa-calendar"></i> January 10, 2025</span>
                     <span><i class="fas fa-clock"></i> 18 min read</span>
-                    <span><i class="fas fa-tag"></i> Intermediate</span>
-                </div>
+                    <span><i class="fas fa-tag"></i> Intermediate</span></div>
             </header>
             
             <div class="blog-post-content">
                 <h2>What is Jenkins?</h2>
                 <p>Jenkins is an open-source automation server that enables developers to build, test, and deploy applications through continuous integration and continuous deployment (CI/CD) pipelines.</p>
                 
-                <h2>Jenkins Installation</h2>
+
+<h2>Jenkins Installation</h2>
                 <h3>Docker Installation</h3>
-                <pre><code># Run Jenkins in Docker
+
+<pre><code># Run Jenkins in Docker
 docker run -d \
   --name jenkins \
   -p 8080:8080 \
@@ -40,8 +41,10 @@ docker run -d \
 # Get initial admin password
 docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword</code></pre>
                 
-                <h3>Ubuntu Installation</h3>
-                <pre><code># Add Jenkins repository
+
+<h3>Ubuntu Installation</h3>
+
+<pre><code># Add Jenkins repository
 wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -
 sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
 
@@ -53,7 +56,8 @@ sudo apt install jenkins
 sudo systemctl start jenkins
 sudo systemctl enable jenkins</code></pre>
                 
-                <h2><span>📝</span> Pipeline Types in Jenkins</h2>
+
+<h2><span>📝</span> Pipeline Types in Jenkins</h2>
                 
                 <div class="info-box">
                     <h3>Jenkins Pipeline Types</h3>
@@ -61,13 +65,13 @@ sudo systemctl enable jenkins</code></pre>
                         <li><strong>Declarative Pipeline:</strong> Structured, easier syntax (recommended)</li>
                         <li><strong>Scripted Pipeline:</strong> Groovy-based, more flexible</li>
                         <li><strong>Freestyle Projects:</strong> GUI-based configuration</li>
-                        <li><strong>Multibranch Pipeline:</strong> Automatic branch detection</li>
-                    </ul>
-                </div>
+                        <li><strong>Multibranch Pipeline:</strong> Automatic branch detection</li></ul></div>
                 
-                <h3><span>1. 📜</span> Declarative Pipeline (Recommended)</h3>
+
+<h3><span>1. 📜</span> Declarative Pipeline (Recommended)</h3>
                 <p>Structured approach with predefined sections and easier syntax:</p>
-                <pre><code>pipeline {
+
+<pre><code>pipeline {
     agent any
     
     environment {
@@ -178,9 +182,11 @@ sudo systemctl enable jenkins</code></pre>
     }
 }</code></pre>
                 
-                <h3><span>2. 📜</span> Scripted Pipeline (Advanced)</h3>
+
+<h3><span>2. 📜</span> Scripted Pipeline (Advanced)</h3>
                 <p>Groovy-based approach with more flexibility and programming constructs:</p>
-                <pre><code>node {
+
+<pre><code>node {
     def app
     def buildNumber = env.BUILD_NUMBER
     def branchName = env.BRANCH_NAME
@@ -251,9 +257,11 @@ sudo systemctl enable jenkins</code></pre>
     }
 }</code></pre>
                 
-                <h3><span>3. 🌳</span> Multibranch Pipeline</h3>
+
+<h3><span>3. 🌳</span> Multibranch Pipeline</h3>
                 <p>Automatically discovers and manages pipelines for multiple branches:</p>
-                <pre><code>// Jenkinsfile for multibranch pipeline
+
+<pre><code>// Jenkinsfile for multibranch pipeline
 pipeline {
     agent any
     
@@ -304,9 +312,11 @@ pipeline {
     }
 }</code></pre>
                 
-                <h2><span>🚀</span> Advanced Pipeline Features</h2>
+
+<h2><span>🚀</span> Advanced Pipeline Features</h2>
                 <h3>Parallel Execution</h3>
-                <pre><code>pipeline {
+
+<pre><code>pipeline {
     agent any
     stages {
         stage('Parallel Tests') {
@@ -331,8 +341,10 @@ pipeline {
     }
 }</code></pre>
                 
-                <h3>Conditional Stages</h3>
-                <pre><code>pipeline {
+
+<h3>Conditional Stages</h3>
+
+<pre><code>pipeline {
     agent any
     stages {
         stage('Deploy to Staging') {
@@ -356,7 +368,8 @@ pipeline {
     }
 }</code></pre>
                 
-                <h2>Environment Variables and Parameters</h2>
+
+<h2>Environment Variables and Parameters</h2>
                 <pre><code>pipeline {
     agent any
     
@@ -388,9 +401,11 @@ pipeline {
     }
 }</code></pre>
                 
-                <h2>Docker Integration</h2>
+
+<h2>Docker Integration</h2>
                 <h3>Building and Pushing Images</h3>
-                <pre><code>pipeline {
+
+<pre><code>pipeline {
     agent any
     
     environment {
@@ -413,7 +428,8 @@ pipeline {
     }
 }</code></pre>
                 
-                <h2>Kubernetes Deployment</h2>
+
+<h2>Kubernetes Deployment</h2>
                 <pre><code>pipeline {
     agent any
     
@@ -432,9 +448,11 @@ pipeline {
     }
 }</code></pre>
                 
-                <h2>Testing Integration</h2>
+
+<h2>Testing Integration</h2>
                 <h3>Unit Tests with Coverage</h3>
-                <pre><code>pipeline {
+
+<pre><code>pipeline {
     agent any
     
     stages {
@@ -458,7 +476,8 @@ pipeline {
     }
 }</code></pre>
                 
-                <h2>Security Scanning</h2>
+
+<h2>Security Scanning</h2>
                 <pre><code>pipeline {
     agent any
     
@@ -486,7 +505,8 @@ pipeline {
     }
 }</code></pre>
                 
-                <h2>Notifications</h2>
+
+<h2>Notifications</h2>
                 <pre><code>pipeline {
     agent any
     
@@ -512,7 +532,8 @@ pipeline {
     }
 }</code></pre>
                 
-                <h2>Multi-branch Pipeline</h2>
+
+<h2>Multi-branch Pipeline</h2>
                 <pre><code>pipeline {
     agent any
     
@@ -549,7 +570,8 @@ pipeline {
     }
 }</code></pre>
                 
-                <h2>Jenkins Configuration as Code</h2>
+
+<h2>Jenkins Configuration as Code</h2>
                 <pre><code># jenkins.yaml
 jenkins:
   systemMessage: "Jenkins configured automatically by JCasC"
@@ -578,7 +600,8 @@ jobs:
         }
       }</code></pre>
                 
-                <h2>Best Practices</h2>
+
+<h2>Best Practices</h2>
                 <ul>
                     <li>Use declarative pipelines over scripted</li>
                     <li>Implement proper error handling</li>
@@ -587,12 +610,13 @@ jobs:
                     <li>Implement proper testing at each stage</li>
                     <li>Use parallel execution where possible</li>
                     <li>Monitor pipeline performance and optimize</li>
-                    <li>Implement proper logging and notifications</li>
-                </ul>
+                    <li>Implement proper logging and notifications</li></ul>
                 
-                <h2>Troubleshooting Common Issues</h2>
+
+<h2>Troubleshooting Common Issues</h2>
                 <h3>Pipeline Debugging</h3>
-                <pre><code>// Add debug information
+
+<pre><code>// Add debug information
 pipeline {
     agent any
     stages {
@@ -607,10 +631,9 @@ pipeline {
     }
 }</code></pre>
                 
-                <h2>Conclusion</h2>
-                <p>Jenkins provides powerful CI/CD capabilities for automating software delivery. Start with simple pipelines and gradually add advanced features like parallel execution, security scanning, and multi-environment deployments. Focus on creating reliable, maintainable pipelines that provide fast feedback to development teams.</p>
-            </div>
-        </article>
-    </div>
+
+<h2>Conclusion</h2>
+                <p>Jenkins provides powerful CI/CD capabilities for automating software delivery. Start with simple pipelines and gradually add advanced features like parallel execution, security scanning, and multi-environment deployments. Focus on creating reliable, maintainable pipelines that provide fast feedback to development teams.</p></div>
+        </article></div>
 </body>
 </html>

@@ -20,19 +20,17 @@
                 <div class="blog-post-meta">
                     <span><i class="fas fa-calendar"></i> January 13, 2025</span>
                     <span><i class="fas fa-clock"></i> 16 min read</span>
-                    <span><i class="fas fa-tag"></i> Beginner</span>
-                </div>
+                    <span><i class="fas fa-tag"></i> Beginner</span></div>
             </header>
             
             <div class="blog-post-content">
                 <div class="highlight-box">
                     <h2>🐳 What is Docker?</h2>
-                    <p>Docker is a <strong>containerization platform</strong> that packages applications and their dependencies into lightweight, portable containers. These containers can run consistently across different environments.</p>
-                </div>
+                    <p>Docker is a <strong>containerization platform</strong> that packages applications and their dependencies into lightweight, portable containers. These containers can run consistently across different environments.</p></div>
                 
-                <blockquote>
-                    "Docker enables developers to package applications into containers—standardized executable components combining application source code with the operating system libraries and dependencies." - Docker Documentation
-                </blockquote>
+
+<blockquote>
+                    "Docker enables developers to package applications into containers—standardized executable components combining application source code with the operating system libraries and dependencies." - Docker Documentation</blockquote>
 
                 <div class="info-box">
                     <h2>🎯 Key Benefits</h2>
@@ -40,24 +38,23 @@
                         <li><strong>Portability:</strong> Run anywhere - development, testing, production</li>
                         <li><strong>Consistency:</strong> Same environment across all stages</li>
                         <li><strong>Efficiency:</strong> Lightweight compared to virtual machines</li>
-                        <li><strong>Scalability:</strong> Easy to scale up or down</li>
-                    </ul>
-                </div>
+                        <li><strong>Scalability:</strong> Easy to scale up or down</li></ul></div>
 
-                <h2>🏗️ Docker Architecture</h2>
+
+<h2>🏗️ Docker Architecture</h2>
                 <div class="info-box">
                     <h3>Core Components</h3>
                     <ul>
                         <li><strong>⚙️ Docker Engine:</strong> Runtime that manages containers</li>
                         <li><strong>🖼️ Docker Images:</strong> Read-only templates for containers</li>
                         <li><strong>📦 Docker Containers:</strong> Running instances of images</li>
-                        <li><strong>📝 Dockerfile:</strong> Instructions to build images</li>
-                    </ul>
-                </div>
+                        <li><strong>📝 Dockerfile:</strong> Instructions to build images</li></ul></div>
 
-                <h2>💻 Essential Docker Commands</h2>
+
+<h2>💻 Essential Docker Commands</h2>
                 <h3>Basic Commands</h3>
-                <pre><code># Pull an image from Docker Hub
+
+<pre><code># Pull an image from Docker Hub
 docker pull nginx:latest
 
 # Run a container
@@ -78,9 +75,11 @@ docker images
 # Remove an image
 docker rmi nginx:latest</code></pre>
 
-                <h2>🛠️ Creating Your First Dockerfile</h2>
+
+<h2>🛠️ Creating Your First Dockerfile</h2>
                 <h3>Simple Node.js Application</h3>
-                <pre><code># Use official Node.js runtime
+
+<pre><code># Use official Node.js runtime
 FROM node:18-alpine
 
 # Set working directory
@@ -101,10 +100,13 @@ EXPOSE 3000
 # Define startup command
 CMD ["npm", "start"]</code></pre>
 
-                <h2>🐳 Docker Compose</h2>
+
+<h2>🐳 Docker Compose</h2>
                 <p>Docker Compose allows you to <strong>define and run multi-container applications</strong>:</p>
-                <h3>docker-compose.yml Example</h3>
-                <pre><code>version: '3.8'
+
+<h3>docker-compose.yml Example</h3>
+
+<pre><code>version: '3.8'
 
 services:
   web:
@@ -128,7 +130,8 @@ services:
 volumes:
   db-data:</code></pre>
 
-                <div class="highlight-box">
+
+<div class="highlight-box">
                     <h2>💡 Best Practices</h2>
                     <ul>
                         <li><strong>Base Images:</strong> Use official, trusted base images</li>
@@ -136,18 +139,15 @@ volumes:
                         <li><strong>Ignore Files:</strong> Use .dockerignore files effectively</li>
                         <li><strong>Security:</strong> Run containers as non-root users</li>
                         <li><strong>Multi-stage:</strong> Use multi-stage builds for production</li>
-                        <li><strong>Tagging:</strong> Tag images properly for version control</li>
-                    </ul>
-                </div>
+                        <li><strong>Tagging:</strong> Tag images properly for version control</li></ul></div>
                 
-                <h2>🎯 Conclusion</h2>
+
+<h2>🎯 Conclusion</h2>
                 <p>Docker fundamentals provide the <strong>foundation for modern containerization</strong>. Master these concepts to build, deploy, and manage applications efficiently across any environment.</p>
                 
-                <div class="info-box">
-                    <p><strong>Next Steps:</strong> Practice with simple applications, explore Docker Compose for multi-container setups, then advance to orchestration with Kubernetes.</p>
-                </div>
-            </div>
-        </article>
-    </div>
+
+<div class="info-box">
+                    <p><strong>Next Steps:</strong> Practice with simple applications, explore Docker Compose for multi-container setups, then advance to orchestration with Kubernetes.</p></div></div>
+        </article></div>
 </body>
 </html>

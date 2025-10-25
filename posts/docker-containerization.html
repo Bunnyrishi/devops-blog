@@ -19,49 +19,49 @@
                 <div class="blog-post-meta">
                     <span><i class="fas fa-calendar"></i> January 12, 2025</span>
                     <span><i class="fas fa-clock"></i> 15 min read</span>
-                    <span><i class="fas fa-tag"></i> Intermediate</span>
-                </div>
+                    <span><i class="fas fa-tag"></i> Intermediate</span></div>
             </header>
             
             <div class="blog-post-content">
                 <div class="highlight-box">
                     <h2>🐳 What is Docker?</h2>
-                    <p>Docker is a <strong>containerization platform</strong> that packages applications and their dependencies into lightweight, portable containers. These containers can run consistently across different environments, from development to production, solving the "it works on my machine" problem.</p>
-                </div>
-                
-                <blockquote>
-                    "Docker containers wrap up software in a complete filesystem that contains everything it needs to run: code, runtime, system tools, system libraries – anything you can install on a server." - Docker Documentation
-                </blockquote>
-                
-                <h2>📚 Key Docker Concepts</h2>
-                
+                    <p>Docker is a <strong>containerization platform</strong> that packages applications and their dependencies into lightweight, portable containers. These containers can run consistently across different environments, from development to production, solving the "it works on my machine" problem.</p></div>
+
+
+<blockquote>
+                    "Docker containers wrap up software in a complete filesystem that contains everything it needs to run: code, runtime, system tools, system libraries – anything you can install on a server." - Docker Documentation</blockquote>
+
+
+<h2>📚 Key Docker Concepts</h2>
+
                 <h3>🖼️ Docker Images</h3>
                 <p>Docker images are <strong>read-only templates</strong> used to create containers. Think of them as blueprints that contain:</p>
                 <ul>
                     <li>Application code and dependencies</li>
                     <li>Runtime environment and libraries</li>
                     <li>Configuration files and environment variables</li>
-                    <li>Metadata and instructions for execution</li>
-                </ul>
+                    <li>Metadata and instructions for execution</li></ul>
                 
-                <h3>📦 Containers</h3>
+
+<h3>📦 Containers</h3>
                 <p>Containers are <strong>running instances</strong> of Docker images. Key characteristics:</p>
                 <ul>
                     <li><strong>Isolated:</strong> Each container runs in its own environment</li>
                     <li><strong>Lightweight:</strong> Share the host OS kernel (unlike VMs)</li>
                     <li><strong>Portable:</strong> Run consistently across different platforms</li>
-                    <li><strong>Scalable:</strong> Easy to start, stop, and replicate</li>
-                </ul>
+                    <li><strong>Scalable:</strong> Easy to start, stop, and replicate</li></ul>
                 
-                <div class="info-box">
+
+<div class="info-box">
                     <h3>📝 Dockerfile</h3>
-                    <p>A <strong>text file</strong> containing step-by-step instructions to build a Docker image automatically. It defines the base image, dependencies, configuration, and startup commands.</p>
-                </div>
+                    <p>A <strong>text file</strong> containing step-by-step instructions to build a Docker image automatically. It defines the base image, dependencies, configuration, and startup commands.</p></div>
                 
-                <h2>⚙️ Essential Docker Commands</h2>
+
+<h2>⚙️ Essential Docker Commands</h2>
                 
                 <h3>🔄 Image Management</h3>
-                <pre><code># Pull an image from Docker Hub
+
+<pre><code># Pull an image from Docker Hub
 docker pull nginx:latest
 
 # List local images
@@ -76,8 +76,10 @@ docker rmi nginx:latest
 # Tag an image
 docker tag my-app:v1.0 my-app:latest</code></pre>
                 
-                <h3>🚀 Container Operations</h3>
-                <pre><code># Run a container (detached mode)
+
+<h3>🚀 Container Operations</h3>
+
+<pre><code># Run a container (detached mode)
 docker run -d -p 80:80 --name my-nginx nginx
 
 # Run container interactively
@@ -104,10 +106,12 @@ docker logs my-nginx
 # Execute command in running container
 docker exec -it my-nginx /bin/bash</code></pre>
                 
-                <h2>🛠️ Creating Your First Dockerfile</h2>
+
+<h2>🛠️ Creating Your First Dockerfile</h2>
                 
                 <h3>👍 Best Practices Dockerfile</h3>
-                <pre><code># Use specific version tags for reproducibility
+
+<pre><code># Use specific version tags for reproducibility
 FROM node:16-alpine
 
 # Add metadata
@@ -144,8 +148,10 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
 # Define startup command
 CMD ["npm", "start"]</code></pre>
                 
-                <h3>📄 .dockerignore File</h3>
-                <pre><code># Ignore unnecessary files to reduce image size
+
+<h3>📄 .dockerignore File</h3>
+
+<pre><code># Ignore unnecessary files to reduce image size
 node_modules
 npm-debug.log
 .git
@@ -157,15 +163,16 @@ coverage
 .DS_Store
 *.log</code></pre>
                 
-                <h2>💾 Docker Volumes: Persistent Storage</h2>
+
+<h2>💾 Docker Volumes: Persistent Storage</h2>
                 <p>Volumes provide <strong>persistent storage</strong> that survives container restarts and removals:</p>
                 
-                <h3>📊 Types of Volumes</h3>
+
+<h3>📊 Types of Volumes</h3>
                 <ul>
                     <li><strong>Named Volumes:</strong> Managed by Docker, best for production</li>
                     <li><strong>Bind Mounts:</strong> Direct host filesystem mapping</li>
-                    <li><strong>tmpfs Mounts:</strong> Temporary filesystem in memory</li>
-                </ul>
+                    <li><strong>tmpfs Mounts:</strong> Temporary filesystem in memory</li></ul>
                 
                 <pre><code># Create a named volume
 docker volume create my-data
@@ -185,16 +192,17 @@ docker run -v my-data:/app/data:ro my-app
 # Inspect volume details
 docker volume inspect my-data</code></pre>
                 
-                <h2>🌐 Docker Networks: Container Communication</h2>
+
+<h2>🌐 Docker Networks: Container Communication</h2>
                 <p>Networks enable <strong>secure communication</strong> between containers:</p>
                 
-                <h3>🔗 Network Types</h3>
+
+<h3>🔗 Network Types</h3>
                 <ul>
                     <li><strong>Bridge:</strong> Default network for standalone containers</li>
                     <li><strong>Host:</strong> Remove network isolation (use host networking)</li>
                     <li><strong>Overlay:</strong> Multi-host networking for Docker Swarm</li>
-                    <li><strong>None:</strong> Disable networking</li>
-                </ul>
+                    <li><strong>None:</strong> Disable networking</li></ul>
                 
                 <pre><code># Create a custom bridge network
 docker network create --driver bridge my-network
@@ -215,11 +223,13 @@ docker network inspect my-network
 # Connect running container to network
 docker network connect my-network existing-container</code></pre>
                 
-                <h2>🏢 Production Best Practices</h2>
+
+<h2>🏢 Production Best Practices</h2>
                 
                 <h3>1. 🏗️ Multi-stage Builds</h3>
                 <p>Reduce image size by separating build and runtime environments:</p>
-                <pre><code># Build stage
+
+<pre><code># Build stage
 FROM node:16 AS builder
 WORKDIR /app
 COPY package*.json ./
@@ -246,7 +256,8 @@ USER nextjs
 EXPOSE 3000
 CMD ["npm", "start"]</code></pre>
                 
-                <div class="highlight-box">
+
+<div class="highlight-box">
                     <h3>2. 🔒 Security Best Practices</h3>
                     <ul>
                         <li><strong>Use Official Images:</strong> Start with trusted base images</li>
@@ -254,18 +265,16 @@ CMD ["npm", "start"]</code></pre>
                         <li><strong>Scan Images:</strong> Use tools like <code>docker scan</code> or Snyk</li>
                         <li><strong>Minimal Images:</strong> Use Alpine or distroless images</li>
                         <li><strong>Secrets Management:</strong> Never embed secrets in images</li>
-                        <li><strong>Resource Limits:</strong> Set CPU and memory limits</li>
-                    </ul>
-                </div>
+                        <li><strong>Resource Limits:</strong> Set CPU and memory limits</li></ul></div>
                 
-                <h3>3. 📈 Image Optimization</h3>
+
+<h3>3. 📈 Image Optimization</h3>
                 <ul>
                     <li><strong>Layer Caching:</strong> Order Dockerfile instructions by change frequency</li>
                     <li><strong>Alpine Linux:</strong> Use minimal base images (5MB vs 100MB+)</li>
                     <li><strong>Combine RUN Commands:</strong> Reduce layers with <code>&&</code></li>
                     <li><strong>.dockerignore:</strong> Exclude unnecessary files</li>
-                    <li><strong>Clean Up:</strong> Remove package managers and caches</li>
-                </ul>
+                    <li><strong>Clean Up:</strong> Remove package managers and caches</li></ul>
                 
                 <pre><code># Optimized Dockerfile example
 FROM alpine:3.16
@@ -280,11 +289,14 @@ RUN apk add --no-cache \
 RUN apk del .build-deps && \
     rm -rf /var/cache/apk/*</code></pre>
                 
-                <h2>🐳 Docker Compose: Multi-Container Applications</h2>
+
+<h2>🐳 Docker Compose: Multi-Container Applications</h2>
                 <p>Docker Compose simplifies <strong>multi-container application</strong> management:</p>
                 
-                <h3>📝 Complete docker-compose.yml Example</h3>
-                <pre><code>version: '3.8'
+
+<h3>📝 Complete docker-compose.yml Example</h3>
+
+<pre><code>version: '3.8'
 
 services:
   # Web application
@@ -352,8 +364,10 @@ networks:
   app-network:
     driver: bridge</code></pre>
                 
-                <h3>🚀 Docker Compose Commands</h3>
-                <pre><code># Start all services
+
+<h3>🚀 Docker Compose Commands</h3>
+
+<pre><code># Start all services
 docker-compose up -d
 
 # Build and start services
@@ -374,10 +388,12 @@ docker-compose up --scale web=3
 # Execute command in service
 docker-compose exec web /bin/bash</code></pre>
                 
-                <div class="info-box">
+
+<div class="info-box">
                     <h2>📈 Monitoring and Debugging</h2>
                     <h3>Container Health Monitoring</h3>
-                    <pre><code># Monitor container resources
+
+<pre><code># Monitor container resources
 docker stats
 
 # Inspect container details
@@ -387,24 +403,21 @@ docker inspect container-name
 docker top container-name
 
 # Monitor container events
-docker events --filter container=my-app</code></pre>
-                </div>
+docker events --filter container=my-app</code></pre></div>
                 
-                <h2>🎯 Conclusion</h2>
+
+<h2>🎯 Conclusion</h2>
                 <p>Docker revolutionizes application deployment by providing <strong>consistent, portable, and scalable containerization</strong>. From development to production, Docker ensures your applications run reliably across any environment.</p>
                 
-                <div class="highlight-box">
+
+<div class="highlight-box">
                     <h3>🚀 Next Steps in Your Docker Journey</h3>
                     <ul>
                         <li><strong>Container Orchestration:</strong> Learn Kubernetes for production-scale deployments</li>
                         <li><strong>CI/CD Integration:</strong> Integrate Docker into your build pipelines</li>
                         <li><strong>Security Scanning:</strong> Implement vulnerability scanning in your workflow</li>
                         <li><strong>Monitoring:</strong> Set up container monitoring with Prometheus and Grafana</li>
-                        <li><strong>Registry Management:</strong> Learn Docker Hub, ECR, or private registries</li>
-                    </ul>
-                </div>
-            </div>
-        </article>
-    </div>
+                        <li><strong>Registry Management:</strong> Learn Docker Hub, ECR, or private registries</li></ul></div></div>
+        </article></div>
 </body>
 </html>

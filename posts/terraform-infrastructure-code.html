@@ -19,24 +19,24 @@
                 <div class="blog-post-meta">
                     <span><i class="fas fa-calendar"></i> January 9, 2025</span>
                     <span><i class="fas fa-clock"></i> 16 min read</span>
-                    <span><i class="fas fa-tag"></i> Intermediate</span>
-                </div>
+                    <span><i class="fas fa-tag"></i> Intermediate</span></div>
             </header>
             
             <div class="blog-post-content">
                 <div class="highlight-box">
                     <h2>🏗️ What is Terraform?</h2>
-                    <p>Terraform is an <strong>Infrastructure as Code (IaC) tool</strong> that allows you to define and provision infrastructure using declarative configuration files. It supports multiple cloud providers and on-premises infrastructure.</p>
-                </div>
+                    <p>Terraform is an <strong>Infrastructure as Code (IaC) tool</strong> that allows you to define and provision infrastructure using declarative configuration files. It supports multiple cloud providers and on-premises infrastructure.</p></div>
                 
-                <blockquote>
-                    "Terraform enables you to safely and predictably create, change, and improve infrastructure." - HashiCorp
-                </blockquote>
+
+<blockquote>
+                    "Terraform enables you to safely and predictably create, change, and improve infrastructure." - HashiCorp</blockquote>
                 
-                <h2>📚 Core Terraform Concepts</h2>
+
+<h2>📚 Core Terraform Concepts</h2>
                 <h3>Providers</h3>
                 <p>Plugins that interact with APIs of cloud providers:</p>
-                <pre><code>terraform {
+
+<pre><code>terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -49,9 +49,11 @@ provider "aws" {
   region = "us-west-2"
 }</code></pre>
                 
-                <h3>Resources</h3>
+
+<h3>Resources</h3>
                 <p>Infrastructure components you want to create:</p>
-                <pre><code>resource "aws_instance" "web" {
+
+<pre><code>resource "aws_instance" "web" {
   ami           = "ami-0c02fb55956c7d316"
   instance_type = "t3.micro"
   
@@ -60,7 +62,8 @@ provider "aws" {
   }
 }</code></pre>
                 
-                <h2>🔄 Basic Terraform Workflow</h2>
+
+<h2>🔄 Basic Terraform Workflow</h2>
                 <pre><code># Initialize Terraform
 terraform init
 
@@ -73,9 +76,11 @@ terraform apply
 # Destroy infrastructure
 terraform destroy</code></pre>
                 
-                <h2>📊 Variables and Outputs</h2>
+
+<h2>📊 Variables and Outputs</h2>
                 <h3>Variables</h3>
-                <pre><code># variables.tf
+
+<pre><code># variables.tf
 variable "instance_type" {
   description = "EC2 instance type"
   type        = string
@@ -98,8 +103,10 @@ resource "aws_instance" "web" {
   }
 }</code></pre>
                 
-                <h3>Outputs</h3>
-                <pre><code># outputs.tf
+
+<h3>Outputs</h3>
+
+<pre><code># outputs.tf
 output "instance_ip" {
   description = "Public IP of the instance"
   value       = aws_instance.web.public_ip
@@ -110,9 +117,11 @@ output "instance_dns" {
   value       = aws_instance.web.public_dns
 }</code></pre>
                 
-                <h2>💾 State Management</h2>
+
+<h2>💾 State Management</h2>
                 <h3>Remote State</h3>
-                <pre><code>terraform {
+
+<pre><code>terraform {
   backend "s3" {
     bucket = "my-terraform-state"
     key    = "prod/terraform.tfstate"
@@ -123,9 +132,11 @@ output "instance_dns" {
   }
 }</code></pre>
                 
-                <h2>📦 Modules</h2>
+
+<h2>📦 Modules</h2>
                 <h3>Creating a Module</h3>
-                <pre><code># modules/vpc/main.tf
+
+<pre><code># modules/vpc/main.tf
 resource "aws_vpc" "main" {
   cidr_block           = var.cidr_block
   enable_dns_hostnames = true
@@ -149,8 +160,10 @@ resource "aws_subnet" "public" {
   }
 }</code></pre>
                 
-                <h3>Using a Module</h3>
-                <pre><code>module "vpc" {
+
+<h3>Using a Module</h3>
+
+<pre><code>module "vpc" {
   source = "./modules/vpc"
   
   name               = "production"
@@ -159,7 +172,8 @@ resource "aws_subnet" "public" {
   public_subnets     = ["10.0.1.0/24", "10.0.2.0/24"]
 }</code></pre>
                 
-                <h2>📄 Data Sources</h2>
+
+<h2>📄 Data Sources</h2>
                 <pre><code># Get latest Amazon Linux AMI
 data "aws_ami" "amazon_linux" {
   most_recent = true
@@ -176,7 +190,8 @@ resource "aws_instance" "web" {
   instance_type = "t3.micro"
 }</code></pre>
                 
-                <h2>⚙️ Provisioners</h2>
+
+<h2>⚙️ Provisioners</h2>
                 <pre><code>resource "aws_instance" "web" {
   ami           = "ami-0c02fb55956c7d316"
   instance_type = "t3.micro"
@@ -199,7 +214,8 @@ resource "aws_instance" "web" {
   }
 }</code></pre>
                 
-                <h2>❓ Conditional Resources</h2>
+
+<h2>❓ Conditional Resources</h2>
                 <pre><code>resource "aws_instance" "web" {
   count = var.create_instance ? 1 : 0
   
@@ -214,7 +230,8 @@ resource "aws_eip" "web" {
   domain   = "vpc"
 }</code></pre>
                 
-                <h2>🔁 Loops and Dynamic Blocks</h2>
+
+<h2>🔁 Loops and Dynamic Blocks</h2>
                 <pre><code># For each
 resource "aws_instance" "web" {
   for_each = var.instances
@@ -242,7 +259,8 @@ resource "aws_security_group" "web" {
   }
 }</code></pre>
                 
-                <h2>📁 Workspace Management</h2>
+
+<h2>📁 Workspace Management</h2>
                 <pre><code># Create workspace
 terraform workspace new production
 terraform workspace new staging
@@ -264,7 +282,8 @@ resource "aws_instance" "web" {
   }
 }</code></pre>
                 
-                <div class="highlight-box">
+
+<div class="highlight-box">
                     <h2>💡 Best Practices</h2>
                     <ul>
                         <li><strong>Remote State:</strong> Use remote state storage</li>
@@ -274,11 +293,10 @@ resource "aws_instance" "web" {
                         <li><strong>Variables:</strong> Use variables for flexibility</li>
                         <li><strong>Tagging:</strong> Tag all resources consistently</li>
                         <li><strong>Data Sources:</strong> Use data sources when possible</li>
-                        <li><strong>Security:</strong> Implement proper access controls</li>
-                    </ul>
-                </div>
+                        <li><strong>Security:</strong> Implement proper access controls</li></ul></div>
                 
-                <h2>🔒 Security Considerations</h2>
+
+<h2>🔒 Security Considerations</h2>
                 <pre><code># Use sensitive variables
 variable "db_password" {
   description = "Database password"
@@ -297,14 +315,13 @@ terraform {
   }
 }</code></pre>
                 
-                <h2>🎯 Conclusion</h2>
+
+<h2>🎯 Conclusion</h2>
                 <p>Terraform enables <strong>infrastructure automation through code</strong>, providing consistency, version control, and repeatability.</p>
                 
-                <div class="info-box">
-                    <p><strong>Success Path:</strong> Start with simple resources and gradually adopt advanced features like modules, workspaces, and remote state management for production environments.</p>
-                </div>
-            </div>
-        </article>
-    </div>
+
+<div class="info-box">
+                    <p><strong>Success Path:</strong> Start with simple resources and gradually adopt advanced features like modules, workspaces, and remote state management for production environments.</p></div></div>
+        </article></div>
 </body>
 </html>

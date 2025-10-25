@@ -19,43 +19,40 @@
                 <div class="blog-post-meta">
                     <span><i class="fas fa-calendar"></i> December 30, 2024</span>
                     <span><i class="fas fa-clock"></i> 25 min read</span>
-                    <span><i class="fas fa-tag"></i> Advanced</span>
-                </div>
+                    <span><i class="fas fa-tag"></i> Advanced</span></div>
             </header>
             
             <div class="blog-post-content">
                 <div class="highlight-box">
                     <h2>🕸️ What is a Service Mesh?</h2>
-                    <p>A service mesh is a <strong>dedicated infrastructure layer</strong> that handles service-to-service communication in microservices architectures. It provides features like traffic management, security, and observability without requiring changes to application code.</p>
-                </div>
+                    <p>A service mesh is a <strong>dedicated infrastructure layer</strong> that handles service-to-service communication in microservices architectures. It provides features like traffic management, security, and observability without requiring changes to application code.</p></div>
                 
-                <blockquote>
-                    "A service mesh is a configurable, low‑latency infrastructure layer designed to handle a high volume of network‑based interprocess communication among application infrastructure services." - NGINX
-                </blockquote>
+
+<blockquote>
+                    "A service mesh is a configurable, low‑latency infrastructure layer designed to handle a high volume of network‑based interprocess communication among application infrastructure services." - NGINX</blockquote>
                 
-                <h2>🚀 Introduction to Istio</h2>
+
+<h2>🚀 Introduction to Istio</h2>
                 <p>Istio is an <strong>open-source service mesh</strong> that provides a uniform way to secure, connect, and monitor microservices. It works by deploying sidecar proxies (Envoy) alongside each service instance.</p>
                 
-                <h2>🏗️ Core Istio Components</h2>
+
+<h2>🏗️ Core Istio Components</h2>
                 
                 <div class="info-box">
                     <h3>📊 Data Plane</h3>
                     <ul>
                         <li><strong>Envoy Proxy:</strong> Sidecar proxies that handle all network communication</li>
-                        <li><strong>Istio Agent:</strong> Manages proxy configuration and certificates</li>
-                    </ul>
-                </div>
+                        <li><strong>Istio Agent:</strong> Manages proxy configuration and certificates</li></ul></div>
                 
                 <div class="info-box">
                     <h3>🎛️ Control Plane</h3>
                     <ul>
                         <li><strong>Pilot:</strong> Service discovery and traffic management</li>
                         <li><strong>Citadel:</strong> Certificate management and security</li>
-                        <li><strong>Galley:</strong> Configuration validation and distribution</li>
-                    </ul>
-                </div>
+                        <li><strong>Galley:</strong> Configuration validation and distribution</li></ul></div>
                 
-                <h2>⚙️ Installing Istio</h2>
+
+<h2>⚙️ Installing Istio</h2>
                 <pre><code># Download Istio
 curl -L https://istio.io/downloadIstio | sh -
 cd istio-*
@@ -67,10 +64,12 @@ istioctl install --set values.defaultRevision=default
 # Enable sidecar injection
 kubectl label namespace default istio-injection=enabled</code></pre>
                 
-                <h2>🚦 Traffic Management</h2>
+
+<h2>🚦 Traffic Management</h2>
                 <h3>Virtual Services</h3>
                 <p>Define routing rules for services:</p>
-                <pre><code>apiVersion: networking.istio.io/v1beta1
+
+<pre><code>apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   name: bookinfo
@@ -89,9 +88,11 @@ spec:
         host: reviews
         subset: v1</code></pre>
                 
-                <h3>Destination Rules</h3>
+
+<h3>Destination Rules</h3>
                 <p>Configure service subsets and load balancing:</p>
-                <pre><code>apiVersion: networking.istio.io/v1beta1
+
+<pre><code>apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
   name: reviews
@@ -108,10 +109,12 @@ spec:
     labels:
       version: v2</code></pre>
                 
-                <h2>🔒 Security Features</h2>
+
+<h2>🔒 Security Features</h2>
                 <h3>Mutual TLS (mTLS)</h3>
                 <p>Enable automatic mTLS between services:</p>
-                <pre><code>apiVersion: security.istio.io/v1beta1
+
+<pre><code>apiVersion: security.istio.io/v1beta1
 kind: PeerAuthentication
 metadata:
   name: default
@@ -120,8 +123,10 @@ spec:
   mtls:
     mode: STRICT</code></pre>
                 
-                <h3>Authorization Policies</h3>
-                <pre><code>apiVersion: security.istio.io/v1beta1
+
+<h3>Authorization Policies</h3>
+
+<pre><code>apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
   name: allow-read
@@ -139,24 +144,29 @@ spec:
     - operation:
         methods: ["GET"]</code></pre>
                 
-                <h2>👁️ Observability</h2>
+
+<h2>👁️ Observability</h2>
                 <h3>Distributed Tracing</h3>
                 <p>Istio automatically generates trace spans for requests:</p>
-                <pre><code># Install Jaeger
+
+<pre><code># Install Jaeger
 kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.16/samples/addons/jaeger.yaml
 
 # Access Jaeger UI
 istioctl dashboard jaeger</code></pre>
                 
-                <h3>Metrics Collection</h3>
-                <pre><code># Install Prometheus and Grafana
+
+<h3>Metrics Collection</h3>
+
+<pre><code># Install Prometheus and Grafana
 kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.16/samples/addons/prometheus.yaml
 kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.16/samples/addons/grafana.yaml
 
 # Access Grafana
 istioctl dashboard grafana</code></pre>
                 
-                <h2>🔄 Traffic Splitting and Canary Deployments</h2>
+
+<h2>🔄 Traffic Splitting and Canary Deployments</h2>
                 <pre><code>apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
@@ -181,7 +191,8 @@ spec:
         subset: v2
       weight: 10</code></pre>
                 
-                <h2>⚡ Circuit Breaking</h2>
+
+<h2>⚡ Circuit Breaking</h2>
                 <pre><code>apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
@@ -200,7 +211,8 @@ spec:
       interval: 30s
       baseEjectionTime: 30s</code></pre>
                 
-                <div class="highlight-box">
+
+<div class="highlight-box">
                     <h2>💡 Best Practices</h2>
                     <ul>
                         <li><strong>Security First:</strong> Start with permissive mTLS and gradually move to strict</li>
@@ -208,33 +220,34 @@ spec:
                         <li><strong>Monitoring:</strong> Implement proper monitoring and alerting</li>
                         <li><strong>Policies:</strong> Use Istio's built-in security policies</li>
                         <li><strong>Updates:</strong> Regularly update Istio versions</li>
-                        <li><strong>Resources:</strong> Monitor resource usage of sidecar proxies</li>
-                    </ul>
-                </div>
+                        <li><strong>Resources:</strong> Monitor resource usage of sidecar proxies</li></ul></div>
                 
-                <h2>🔧 Troubleshooting Common Issues</h2>
+
+<h2>🔧 Troubleshooting Common Issues</h2>
                 <h3>Sidecar Injection Problems</h3>
-                <pre><code># Check if namespace has injection enabled
+
+<pre><code># Check if namespace has injection enabled
 kubectl get namespace -L istio-injection
 
 # Manually inject sidecar
 istioctl kube-inject -f deployment.yaml | kubectl apply -f -</code></pre>
                 
-                <h3>Configuration Validation</h3>
-                <pre><code># Validate Istio configuration
+
+<h3>Configuration Validation</h3>
+
+<pre><code># Validate Istio configuration
 istioctl analyze
 
 # Check proxy configuration
 istioctl proxy-config cluster <pod-name> -n <namespace></code></pre>
                 
-                <h2>🎯 Conclusion</h2>
+
+<h2>🎯 Conclusion</h2>
                 <p>Istio service mesh provides <strong>powerful capabilities</strong> for managing microservices communication, security, and observability. While it adds complexity, the benefits of traffic management, security policies, and comprehensive monitoring make it valuable for production Kubernetes environments.</p>
                 
-                <div class="info-box">
-                    <p><strong>Pro Tip:</strong> Start with basic traffic management features and gradually adopt advanced security and observability capabilities as your team becomes comfortable with the platform.</p>
-                </div>
-            </div>
-        </article>
-    </div>
+
+<div class="info-box">
+                    <p><strong>Pro Tip:</strong> Start with basic traffic management features and gradually adopt advanced security and observability capabilities as your team becomes comfortable with the platform.</p></div></div>
+        </article></div>
 </body>
 </html>
