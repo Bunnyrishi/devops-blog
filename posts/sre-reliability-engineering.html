@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Reliability Engineering (SRE) | DevOps Mastery</title>
+    <meta name="description" content="Master Site Reliability Engineering practices for building and maintaining large-scale systems">
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="blog-post">
+        <a href="../index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i> Back to Blog
+        </a>
+        
+        <article>
+            <header class="blog-post-header">
+                <h1 class="blog-post-title">Site Reliability Engineering (SRE)</h1>
+                <div class="blog-post-meta">
+                    <span><i class="fas fa-calendar"></i> January 15, 2025</span>
+                    <span><i class="fas fa-clock"></i> 24 min read</span>
+                    <span><i class="fas fa-tag"></i> Advanced</span></div>
+            </header>
+            
+            <div class="blog-post-content">
+                <div class="highlight-box">
+                    <h2>🔧 What is Site Reliability Engineering?</h2>
+                    <p>SRE is a <strong>discipline that applies software engineering principles</strong> to infrastructure and operations problems to create scalable and highly reliable software systems.</p></div>
+
+
+<blockquote>
+                    "SRE is what happens when you ask a software engineer to design an operations team." - Google</blockquote>
+
+
+<h2>🎯 Key Concepts</h2>
+                <div class="info-box">
+                    <h3>Essential Points</h3>
+                    <ul>
+                        <li><strong>SLIs/SLOs:</strong> Service Level Indicators and Objectives</li>
+                        <li><strong>Error Budgets:</strong> Acceptable failure thresholds</li>
+                        <li><strong>Toil Reduction:</strong> Automating repetitive work</li>
+                        <li><strong>Incident Response:</strong> Structured problem resolution</li>
+                        <li><strong>Capacity Planning:</strong> Proactive resource management</li></ul></div>
+
+
+<h2>⚙️ Essential Commands</h2>
+                <pre><code># SLO monitoring with Prometheus
+- alert: HighErrorRate
+  expr: rate(http_requests_total{status=~"5.."}[5m]) > 0.1
+  for: 5m
+  labels:
+    severity: critical
+  annotations:
+    summary: "High error rate detected"
+
+# Error budget calculation
+error_budget = (1 - SLO) * total_requests</code></pre>
+
+
+<h2>🏢 Best Practices</h2>
+                <div class="highlight-box">
+                    <h3>Professional Guidelines</h3>
+                    <ul>
+                        <li><strong>Blameless Culture:</strong> Focus on system improvements</li>
+                        <li><strong>Automation First:</strong> Eliminate manual toil</li>
+                        <li><strong>Gradual Rollouts:</strong> Canary and blue-green deployments</li>
+                        <li><strong>Monitoring Everything:</strong> Comprehensive observability</li></ul></div>
+
+
+<h2>🎯 Conclusion</h2>
+                <p>SRE practices enable <strong>reliable, scalable systems</strong> through engineering discipline and automation.</p>
+
+
+<div class="info-box">
+                    <p><strong>Next Steps:</strong> Define SLOs, implement error budgets, establish incident response procedures, and automate toil.</p></div></div>
+        </article></div>
+</body>
+</html>
