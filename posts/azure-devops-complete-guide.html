@@ -26,11 +26,11 @@
                 <div class="highlight-box">
                     <h2>🚀 What is Azure DevOps?</h2>
                     <p>Azure DevOps is Microsoft's comprehensive <strong>cloud-based DevOps platform</strong> that provides integrated tools for the entire software development lifecycle. It combines development, testing, and deployment capabilities in a unified platform.</p></div>
-                
+
 
 <blockquote>
                     "Azure DevOps brings together everything you need to build, test, and deploy your applications to any cloud or on-premises environment." - Microsoft Azure Team</blockquote>
-                
+
 
 <h2>🏗️ Azure DevOps Services Overview</h2>
                 
@@ -50,11 +50,11 @@ git remote add origin https://dev.azure.com/organization/project/_git/repository
 
 # Push to Azure DevOps
 git push -u origin main</code></pre>
-                
+
 
 <h3>2. 🔄 Azure Pipelines (CI/CD)</h3>
                 <p>Powerful CI/CD platform supporting multiple languages and platforms:</p>
-                
+
 
 <div class="info-box">
                     <h4>Pipeline Types</h4>
@@ -137,7 +137,7 @@ stages:
         tags: |
           $(tag)
           latest</code></pre>
-                
+
 
 <h3>3. 📊 Azure Boards (Project Management)</h3>
                 <p>Agile project management with work item tracking:</p>
@@ -146,7 +146,7 @@ stages:
                     <li><strong>Kanban Boards:</strong> Visual workflow management</li>
                     <li><strong>Sprint Planning:</strong> Scrum and Agile methodologies</li>
                     <li><strong>Dashboards:</strong> Custom reporting and analytics</li></ul>
-                
+
 
 <h3>4. 🧪 Azure Test Plans (Testing)</h3>
                 <p>Comprehensive testing solutions:</p>
@@ -155,7 +155,7 @@ stages:
                     <li><strong>Automated Testing:</strong> Integration with CI/CD</li>
                     <li><strong>Load Testing:</strong> Performance testing capabilities</li>
                     <li><strong>Test Analytics:</strong> Detailed test reporting</li></ul>
-                
+
 
 <h3>5. 📦 Azure Artifacts (Package Management)</h3>
                 <p>Universal package management:</p>
@@ -164,7 +164,7 @@ stages:
                     <li><strong>npm Packages:</strong> Node.js package management</li>
                     <li><strong>Maven Packages:</strong> Java package management</li>
                     <li><strong>Python Packages:</strong> PyPI package management</li></ul>
-                
+
 
 <h2>🔧 Setting Up Your First Pipeline</h2>
                 
@@ -175,9 +175,10 @@ stages:
                         <li>Sign in with Microsoft account</li>
                         <li>Create new organization</li>
                         <li>Create new project</li></ol></div>
-                
+
 
 <h3>Step 2: Set Up Repository</h3>
+
 
 <pre><code># Initialize repository
 git init
@@ -187,9 +188,10 @@ git commit -m "Initial commit"
 # Add Azure DevOps remote
 git remote add origin https://dev.azure.com/yourorg/yourproject/_git/yourrepo
 git push -u origin main</code></pre>
-                
+
 
 <h3>Step 3: Create Build Pipeline</h3>
+
 
 <pre><code># Complete Node.js pipeline example
 trigger:
@@ -237,11 +239,12 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'</code></pre>
-                
+
 
 <h2>🚀 Advanced Pipeline Patterns</h2>
                 
                 <h3>Multi-Stage Pipeline with Environments</h3>
+
 
 <pre><code>trigger:
 - main
@@ -296,7 +299,7 @@ stages:
               azureSubscription: 'Azure-Connection'
               appName: 'myapp-prod'
               package: '$(Pipeline.Workspace)/drop/*.zip'</code></pre>
-                
+
 
 <h3>🔐 Security and Compliance</h3>
                 
@@ -326,7 +329,7 @@ steps:
     echo "Database connection: $(database-connection-string)"
     echo "API Key: $(api-key)"
   displayName: 'Use secrets from Key Vault'</code></pre>
-                
+
 
 <h2>📊 Monitoring and Analytics</h2>
                 
@@ -336,9 +339,10 @@ steps:
                     <li><strong>Duration Trends:</strong> Monitor performance over time</li>
                     <li><strong>Failure Analysis:</strong> Identify common failure points</li>
                     <li><strong>Test Results:</strong> Track test coverage and results</li></ul>
-                
+
 
 <h3>Custom Dashboards</h3>
+
 
 <pre><code># PowerBI integration for advanced analytics
 - task: PowerBIActions@1
@@ -347,7 +351,7 @@ steps:
     Action: 'Publish'
     WorkspaceName: 'DevOps Analytics'
     DatasetName: 'Pipeline Metrics'</code></pre>
-                
+
 
 <h2>🔄 Migration from Jenkins to Azure DevOps</h2>
                 
@@ -359,9 +363,10 @@ steps:
                         <li><strong>Conversion:</strong> Convert Jenkinsfiles to YAML pipelines</li>
                         <li><strong>Testing:</strong> Validate converted pipelines</li>
                         <li><strong>Deployment:</strong> Gradual migration approach</li></ol></div>
-                
+
 
 <h3>Jenkins vs Azure DevOps Comparison</h3>
+
 
 <pre><code># Jenkins Declarative Pipeline
 pipeline {
@@ -396,7 +401,7 @@ steps:
 
 - script: npm test
   displayName: 'Test'</code></pre>
-                
+
 
 <h2>🏢 Enterprise Features</h2>
                 
@@ -406,9 +411,10 @@ steps:
                     <li><strong>Enterprise Security:</strong> Active Directory integration</li>
                     <li><strong>Compliance:</strong> Meet regulatory requirements</li>
                     <li><strong>Customization:</strong> Extensions and custom processes</li></ul>
-                
+
 
 <h3>Parallel Jobs and Scaling</h3>
+
 
 <pre><code># Matrix strategy for multiple configurations
 strategy:
@@ -426,7 +432,7 @@ pool:
 
 steps:
 - script: echo "Running on $(imageName)"</code></pre>
-                
+
 
 <h2>🛠️ Best Practices</h2>
                 
@@ -439,9 +445,10 @@ steps:
                         <li><strong>Artifact Management:</strong> Proper versioning and storage</li>
                         <li><strong>Environment Strategy:</strong> Consistent deployment patterns</li>
                         <li><strong>Security Scanning:</strong> Integrate security tools</li></ul></div>
-                
+
 
 <h3>Performance Optimization</h3>
+
 
 <pre><code># Optimized pipeline with caching
 steps:
@@ -455,7 +462,7 @@ steps:
 
 - script: npm ci
   displayName: 'npm ci'</code></pre>
-                
+
 
 <h2>🔗 Integration Ecosystem</h2>
                 
@@ -465,9 +472,10 @@ steps:
                     <li><strong>WhiteSource:</strong> Security vulnerability scanning</li>
                     <li><strong>Slack/Teams:</strong> Notification integrations</li>
                     <li><strong>Jira:</strong> Work item synchronization</li></ul>
-                
+
 
 <h3>Azure Services Integration</h3>
+
 
 <pre><code># Deploy to Azure Kubernetes Service
 - task: KubernetesManifest@0
@@ -479,7 +487,7 @@ steps:
       k8s/deployment.yaml
       k8s/service.yaml
     containers: 'myregistry.azurecr.io/myapp:$(Build.BuildId)'</code></pre>
-                
+
 
 <h2>📈 Pricing and Licensing</h2>
                 
@@ -490,11 +498,11 @@ steps:
                         <li><strong>Basic + Test Plans:</strong> $6/user/month</li>
                         <li><strong>Parallel Jobs:</strong> Additional capacity pricing</li>
                         <li><strong>Artifacts Storage:</strong> Usage-based pricing</li></ul></div>
-                
+
 
 <h2>🎯 Conclusion</h2>
                 <p>Azure DevOps provides a <strong>comprehensive, integrated platform</strong> for modern DevOps practices. From source control to deployment, it offers enterprise-grade features with excellent integration capabilities.</p>
-                
+
 
 <div class="highlight-box">
                     <h3>🚀 Next Steps in Your Azure DevOps Journey</h3>

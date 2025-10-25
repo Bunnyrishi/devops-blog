@@ -27,7 +27,7 @@
                     <div class="highlight-box">
                         <h2>⚙️ What is Kubernetes?</h2>
                         <p>Kubernetes (K8s) is an <strong>open-source container orchestration platform</strong> that automates the deployment, scaling, and management of containerized applications across clusters of hosts.</p></div>
-                    
+
 
 <blockquote>
                         "Kubernetes is a portable, extensible, open-source platform for managing containerized workloads and services." - Kubernetes Documentation</blockquote>
@@ -56,6 +56,7 @@
 <h2>💻 Essential kubectl Commands</h2>
                     <h3>Basic Operations</h3>
 
+
 <pre><code># Get cluster information
 kubectl cluster-info
 
@@ -81,6 +82,7 @@ kubectl exec -it <pod-name> -- /bin/bash</code></pre>
 <h2>🚀 Creating Your First Pod</h2>
                     <h3>Simple Pod YAML</h3>
 
+
 <pre><code>apiVersion: v1
 kind: Pod
 metadata:
@@ -98,7 +100,9 @@ spec:
 <h2>📦 Deployments</h2>
                     <p>Deployments provide <strong>declarative updates</strong> for pods and replica sets, ensuring desired state management:</p>
 
+
 <h3>Deployment YAML</h3>
+
 
 <pre><code>apiVersion: apps/v1
 kind: Deployment
@@ -124,7 +128,9 @@ spec:
 <h2>🌐 Services</h2>
                     <p>Services <strong>expose pods to network traffic</strong> and provide stable networking endpoints:</p>
 
+
 <h3>Service YAML</h3>
+
 
 <pre><code>apiVersion: v1
 kind: Service
@@ -142,6 +148,7 @@ spec:
 
 <h2>⚙️ Common kubectl Operations</h2>
                     <h3>Deployment Management</h3>
+
 
 <pre><code># Apply configuration from file
 kubectl apply -f deployment.yaml
@@ -164,9 +171,10 @@ kubectl rollout status deployment/nginx-deployment</code></pre>
                         <h3>Configuration Management</h3>
                         <p><strong>ConfigMaps:</strong> Store non-sensitive configuration data</p>
                         <p><strong>Secrets:</strong> Store sensitive information like passwords and API keys</p></div>
-                    
+
 
 <h3>ConfigMap Example</h3>
+
 
 <pre><code># Create ConfigMap from command line
 kubectl create configmap app-config --from-literal=database_url=mongodb://localhost:27017
@@ -197,11 +205,11 @@ spec:
                             <li><strong>Monitoring:</strong> Set up proper logging and monitoring solutions</li>
                             <li><strong>Security:</strong> Use secrets for sensitive data and follow least privilege</li>
                             <li><strong>Labels:</strong> Use consistent labeling for resource management</li></ul></div>
-                    
+
 
 <h2>🎯 Conclusion</h2>
                     <p>Kubernetes provides <strong>powerful container orchestration</strong> capabilities for modern applications. Start with basic concepts like pods and services, then gradually explore advanced features like deployments, ConfigMaps, and networking.</p>
-                    
+
 
 <div class="info-box">
                         <p><strong>Next Steps:</strong> Practice with minikube or kind locally, then explore production-ready clusters with managed services like EKS, GKE, or AKS.</p></div></div>

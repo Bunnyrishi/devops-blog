@@ -26,11 +26,11 @@
                 <div class="highlight-box">
                     <h2>🐧 Why Linux for DevOps?</h2>
                     <p>Linux powers <strong>most servers, cloud instances, and containers</strong>. As a DevOps engineer, Linux proficiency is essential for managing infrastructure, automating deployments, and troubleshooting systems.</p></div>
-                
+
 
 <blockquote>
                     "Linux is not just an operating system, it's the foundation of modern DevOps infrastructure." - Linux Foundation</blockquote>
-                
+
 
 <h2>💻 Essential Linux Commands</h2>
                 <div class="info-box">
@@ -49,9 +49,10 @@ touch file.txt      # Create empty file
 cp source dest      # Copy file
 mv old new          # Move/rename file
 rm file.txt         # Delete file</code></pre>
-                
+
 
 <h3>🔒 File Permissions</h3>
+
 
 <pre><code># View permissions
 ls -l file.txt
@@ -64,7 +65,7 @@ chown user:group file  # Change ownership
 # Permission meanings
 # r (read) = 4, w (write) = 2, x (execute) = 1
 # 755 = rwxr-xr-x (owner: rwx, group: r-x, others: r-x)</code></pre>
-                
+
 
 <h2>⚙️ Process Management</h2>
                 <pre><code># View processes
@@ -78,7 +79,7 @@ kill PID         # Terminate process
 killall nginx    # Kill all nginx processes
 nohup command &  # Run command in background
 jobs             # List background jobs</code></pre>
-                
+
 
 <h2>📊 System Information</h2>
                 <pre><code># System resources
@@ -93,7 +94,7 @@ ifconfig         # Network interfaces
 ip addr show     # IP addresses
 netstat -tulpn   # Network connections
 ss -tulpn        # Socket statistics</code></pre>
-                
+
 
 <h2>📝 Text Processing</h2>
                 <pre><code># View file contents
@@ -113,7 +114,7 @@ sed 's/old/new/g' file    # Replace text
 awk '{print $1}' file     # Print first column
 sort file.txt             # Sort lines
 uniq file.txt             # Remove duplicates</code></pre>
-                
+
 
 <h2>📦 Package Management</h2>
                 <div class="info-box">
@@ -130,7 +131,7 @@ sudo apt remove nginx
 
 # Search packages
 apt search keyword</code></pre>
-                
+
 
 <div class="info-box">
                     <h3>CentOS/RHEL (yum/dnf)</h3>
@@ -142,7 +143,7 @@ sudo dnf install nginx
 # Update system
 sudo yum update
 sudo dnf update</code></pre>
-                
+
 
 <h2>🔧 Service Management (systemd)</h2>
                 <pre><code># Service control
@@ -159,7 +160,7 @@ systemctl is-enabled nginx
 # Enable/disable services
 sudo systemctl enable nginx   # Start on boot
 sudo systemctl disable nginx  # Don't start on boot</code></pre>
-                
+
 
 <h2>💾 File System and Storage</h2>
                 <pre><code># Mount/unmount
@@ -173,7 +174,7 @@ lsblk                   # List block devices
 
 # File system check
 sudo fsck /dev/sdb1</code></pre>
-                
+
 
 <h2>🌍 Environment Variables</h2>
                 <pre><code># View environment variables
@@ -188,7 +189,7 @@ export PATH=$PATH:/new/path
 # Persistent variables (add to ~/.bashrc)
 echo 'export VAR_NAME="value"' >> ~/.bashrc
 source ~/.bashrc</code></pre>
-                
+
 
 <h2>📜 Shell Scripting Basics</h2>
                 <pre><code>#!/bin/bash
@@ -213,7 +214,7 @@ function backup_logs() {
 }
 
 backup_logs</code></pre>
-                
+
 
 <h2>📄 Log Management</h2>
                 <pre><code># System logs
@@ -226,7 +227,7 @@ sudo journalctl --since "1 hour ago"
 /var/log/auth.log               # Authentication
 /var/log/nginx/access.log       # Nginx access
 /var/log/nginx/error.log        # Nginx errors</code></pre>
-                
+
 
 <h2>🔐 Security Basics</h2>
                 <pre><code># User management
@@ -245,7 +246,7 @@ sudo ufw enable
 sudo ufw allow 22/tcp
 sudo ufw allow 80/tcp
 sudo ufw status</code></pre>
-                
+
 
 <h2>📊 Performance Monitoring</h2>
                 <pre><code># System monitoring
@@ -255,7 +256,7 @@ iotop            # I/O monitor
 iftop            # Network monitor
 vmstat 1         # Virtual memory stats
 iostat 1         # I/O statistics</code></pre>
-                
+
 
 <div class="highlight-box">
                     <h2>💡 Best Practices</h2>
@@ -267,11 +268,11 @@ iostat 1         # I/O statistics</code></pre>
                         <li><strong>Backup:</strong> Implement proper backup strategies</li>
                         <li><strong>Permissions:</strong> Follow the principle of least privilege</li>
                         <li><strong>Documentation:</strong> Document system configurations</li></ul></div>
-                
+
 
 <h2>🎯 Conclusion</h2>
                 <p>Linux mastery is <strong>crucial for DevOps success</strong>. Practice these commands regularly, understand the file system structure, and gradually explore advanced topics like kernel tuning, networking, and system optimization.</p>
-                
+
 
 <div class="info-box">
                     <p><strong>Learning Path:</strong> Start with basic commands, practice daily operations, then advance to scripting and system administration for complete Linux proficiency.</p></div></div>

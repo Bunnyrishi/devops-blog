@@ -41,7 +41,7 @@
                     <li>Runtime environment and libraries</li>
                     <li>Configuration files and environment variables</li>
                     <li>Metadata and instructions for execution</li></ul>
-                
+
 
 <h3>📦 Containers</h3>
                 <p>Containers are <strong>running instances</strong> of Docker images. Key characteristics:</p>
@@ -50,16 +50,17 @@
                     <li><strong>Lightweight:</strong> Share the host OS kernel (unlike VMs)</li>
                     <li><strong>Portable:</strong> Run consistently across different platforms</li>
                     <li><strong>Scalable:</strong> Easy to start, stop, and replicate</li></ul>
-                
+
 
 <div class="info-box">
                     <h3>📝 Dockerfile</h3>
                     <p>A <strong>text file</strong> containing step-by-step instructions to build a Docker image automatically. It defines the base image, dependencies, configuration, and startup commands.</p></div>
-                
+
 
 <h2>⚙️ Essential Docker Commands</h2>
                 
                 <h3>🔄 Image Management</h3>
+
 
 <pre><code># Pull an image from Docker Hub
 docker pull nginx:latest
@@ -75,9 +76,10 @@ docker rmi nginx:latest
 
 # Tag an image
 docker tag my-app:v1.0 my-app:latest</code></pre>
-                
+
 
 <h3>🚀 Container Operations</h3>
+
 
 <pre><code># Run a container (detached mode)
 docker run -d -p 80:80 --name my-nginx nginx
@@ -105,11 +107,12 @@ docker logs my-nginx
 
 # Execute command in running container
 docker exec -it my-nginx /bin/bash</code></pre>
-                
+
 
 <h2>🛠️ Creating Your First Dockerfile</h2>
                 
                 <h3>👍 Best Practices Dockerfile</h3>
+
 
 <pre><code># Use specific version tags for reproducibility
 FROM node:16-alpine
@@ -147,9 +150,10 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
 
 # Define startup command
 CMD ["npm", "start"]</code></pre>
-                
+
 
 <h3>📄 .dockerignore File</h3>
+
 
 <pre><code># Ignore unnecessary files to reduce image size
 node_modules
@@ -162,11 +166,11 @@ README.md
 coverage
 .DS_Store
 *.log</code></pre>
-                
+
 
 <h2>💾 Docker Volumes: Persistent Storage</h2>
                 <p>Volumes provide <strong>persistent storage</strong> that survives container restarts and removals:</p>
-                
+
 
 <h3>📊 Types of Volumes</h3>
                 <ul>
@@ -191,11 +195,11 @@ docker run -v my-data:/app/data:ro my-app
 
 # Inspect volume details
 docker volume inspect my-data</code></pre>
-                
+
 
 <h2>🌐 Docker Networks: Container Communication</h2>
                 <p>Networks enable <strong>secure communication</strong> between containers:</p>
-                
+
 
 <h3>🔗 Network Types</h3>
                 <ul>
@@ -222,12 +226,13 @@ docker network inspect my-network
 
 # Connect running container to network
 docker network connect my-network existing-container</code></pre>
-                
+
 
 <h2>🏢 Production Best Practices</h2>
                 
                 <h3>1. 🏗️ Multi-stage Builds</h3>
                 <p>Reduce image size by separating build and runtime environments:</p>
+
 
 <pre><code># Build stage
 FROM node:16 AS builder
@@ -255,7 +260,7 @@ RUN npm ci --only=production && npm cache clean --force
 USER nextjs
 EXPOSE 3000
 CMD ["npm", "start"]</code></pre>
-                
+
 
 <div class="highlight-box">
                     <h3>2. 🔒 Security Best Practices</h3>
@@ -266,7 +271,7 @@ CMD ["npm", "start"]</code></pre>
                         <li><strong>Minimal Images:</strong> Use Alpine or distroless images</li>
                         <li><strong>Secrets Management:</strong> Never embed secrets in images</li>
                         <li><strong>Resource Limits:</strong> Set CPU and memory limits</li></ul></div>
-                
+
 
 <h3>3. 📈 Image Optimization</h3>
                 <ul>
@@ -288,13 +293,14 @@ RUN apk add --no-cache \
 # Clean up in same layer
 RUN apk del .build-deps && \
     rm -rf /var/cache/apk/*</code></pre>
-                
+
 
 <h2>🐳 Docker Compose: Multi-Container Applications</h2>
                 <p>Docker Compose simplifies <strong>multi-container application</strong> management:</p>
-                
+
 
 <h3>📝 Complete docker-compose.yml Example</h3>
+
 
 <pre><code>version: '3.8'
 
@@ -363,9 +369,10 @@ volumes:
 networks:
   app-network:
     driver: bridge</code></pre>
-                
+
 
 <h3>🚀 Docker Compose Commands</h3>
+
 
 <pre><code># Start all services
 docker-compose up -d
@@ -387,11 +394,12 @@ docker-compose up --scale web=3
 
 # Execute command in service
 docker-compose exec web /bin/bash</code></pre>
-                
+
 
 <div class="info-box">
                     <h2>📈 Monitoring and Debugging</h2>
                     <h3>Container Health Monitoring</h3>
+
 
 <pre><code># Monitor container resources
 docker stats
@@ -404,11 +412,11 @@ docker top container-name
 
 # Monitor container events
 docker events --filter container=my-app</code></pre></div>
-                
+
 
 <h2>🎯 Conclusion</h2>
                 <p>Docker revolutionizes application deployment by providing <strong>consistent, portable, and scalable containerization</strong>. From development to production, Docker ensures your applications run reliably across any environment.</p>
-                
+
 
 <div class="highlight-box">
                     <h3>🚀 Next Steps in Your Docker Journey</h3>

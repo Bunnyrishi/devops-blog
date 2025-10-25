@@ -27,7 +27,7 @@
                 <div class="highlight-box">
                     <h2>🐳 What is Docker?</h2>
                     <p>Docker is a <strong>containerization platform</strong> that packages applications and their dependencies into lightweight, portable containers. These containers can run consistently across different environments.</p></div>
-                
+
 
 <blockquote>
                     "Docker enables developers to package applications into containers—standardized executable components combining application source code with the operating system libraries and dependencies." - Docker Documentation</blockquote>
@@ -54,6 +54,7 @@
 <h2>💻 Essential Docker Commands</h2>
                 <h3>Basic Commands</h3>
 
+
 <pre><code># Pull an image from Docker Hub
 docker pull nginx:latest
 
@@ -78,6 +79,7 @@ docker rmi nginx:latest</code></pre>
 
 <h2>🛠️ Creating Your First Dockerfile</h2>
                 <h3>Simple Node.js Application</h3>
+
 
 <pre><code># Use official Node.js runtime
 FROM node:18-alpine
@@ -104,7 +106,9 @@ CMD ["npm", "start"]</code></pre>
 <h2>🐳 Docker Compose</h2>
                 <p>Docker Compose allows you to <strong>define and run multi-container applications</strong>:</p>
 
+
 <h3>docker-compose.yml Example</h3>
+
 
 <pre><code>version: '3.8'
 
@@ -140,11 +144,11 @@ volumes:
                         <li><strong>Security:</strong> Run containers as non-root users</li>
                         <li><strong>Multi-stage:</strong> Use multi-stage builds for production</li>
                         <li><strong>Tagging:</strong> Tag images properly for version control</li></ul></div>
-                
+
 
 <h2>🎯 Conclusion</h2>
                 <p>Docker fundamentals provide the <strong>foundation for modern containerization</strong>. Master these concepts to build, deploy, and manage applications efficiently across any environment.</p>
-                
+
 
 <div class="info-box">
                     <p><strong>Next Steps:</strong> Practice with simple applications, explore Docker Compose for multi-container setups, then advance to orchestration with Kubernetes.</p></div></div>
