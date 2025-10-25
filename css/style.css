@@ -707,4 +707,15 @@ body {
         margin: 1.5rem 0;
         padding: 1.25rem;
     }
+    
+    .info-box::before {
+        top: 10px;
+        left: 10px;
+        font-size: 1rem;
+        padding: 0.4rem;
+    }
+    
+    .info-box {
+        padding: 2.5rem 1rem 1.25rem 1rem !important;
+    }
 }
