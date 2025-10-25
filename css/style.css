@@ -495,7 +495,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
+    right: 0;
     height: 30px;
     background: linear-gradient(90deg, #ff5f56, #ffbd2e, #27ca3f);
     border-radius: 12px 12px 0 0;
