@@ -671,4 +671,16 @@ body {
         left: auto;
         margin: 1rem;
     }
+    
+    .blog-post-content pre {
+        padding: 1.5rem;
+        padding-top: 2.5rem;
+    }
+    
+    .blog-post-content pre::before {
+        position: fixed;
+        width: 100vw;
+        left: 0;
+        right: auto;
+    }
 }
